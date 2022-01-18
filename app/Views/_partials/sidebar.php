@@ -50,6 +50,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="<?= base_url('profile') ?>" class="nav-link <?= uri_string(true) == 'profile' ? 'active' : '' ?>">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Account
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="<?= base_url('about') ?>" class="nav-link <?= uri_string(true) == 'about' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-info-circle"></i>
               <p>
