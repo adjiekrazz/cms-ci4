@@ -33,6 +33,10 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Dashboard::index');
+$routes->get('/book', 'Book::index');
+$routes->get('/about', 'About::index');
+$routes->get('/profile', 'Profile::index');
+$routes->post('/profile/change-password', 'Profile::changePassword');
 
 /*
  * Myth:Auth routes file.
