@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class AddProduct extends Migration
+class AddBooks extends Migration
 {
 	public function up()
 	{
