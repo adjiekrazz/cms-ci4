@@ -24,7 +24,6 @@ class Book extends BaseController
 
 	public function index()
 	{
-        helper(['form', 'url']);
 		return view('book');
 	}
 
