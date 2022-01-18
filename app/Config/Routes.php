@@ -34,6 +34,7 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Dashboard::index');
 $routes->get('/book', 'Book::index');
+$routes->get('/category', 'Category::index');
 $routes->get('/about', 'About::index');
 $routes->get('/profile', 'Profile::index');
 $routes->post('/profile/change-password', 'Profile::changePassword');

@@ -50,6 +50,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="<?= base_url('category') ?>" class="nav-link <?= uri_string(true) == 'category' ? 'active' : '' ?>">
+              <i class="nav-icon fas fa-tags"></i>
+              <p>
+                Category
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="<?= base_url('profile') ?>" class="nav-link <?= uri_string(true) == 'profile' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-user"></i>
               <p>
