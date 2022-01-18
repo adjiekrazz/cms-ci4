@@ -29,7 +29,7 @@ class Profile extends BaseController
     {
         $rules = [
 			'old_password' => 'required',
-			'new_password' => 'required',
+			'new_password' => 'required|min_length[8]',
 			'new_password_confirmation' => 'required|matches[new_password]',
 		];
 
