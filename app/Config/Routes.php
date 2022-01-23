@@ -38,6 +38,7 @@ $routes->get('/category', 'Category::index');
 $routes->get('/about', 'About::index');
 $routes->get('/profile', 'Profile::index');
 $routes->post('/profile/change-password', 'Profile::changePassword');
+$routes->match(['get', 'post'], 'ImageRender/(:segment)', 'ImageRender::index/$1');
 
 /*
  * Myth:Auth routes file.
