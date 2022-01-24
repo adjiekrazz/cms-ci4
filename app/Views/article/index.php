@@ -110,8 +110,8 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-12" style="text-align: center;">
-                            <button type="submit" class="btn btn-success">Add Article</button>
-                            <button type="reset" class="btn btn-danger">Clear</button>
+                            <button name="status" class="btn btn-warning" onclick="addArticle('draft')">Draft</button>
+                            <button name="status" class="btn btn-success" onclick="addArticle('publish')">Publish</button>
                         </div>
                     </div>
                     <?= form_close() ?>
@@ -283,40 +283,45 @@
             var debounce = new $.fn.dataTable.Debounce(article_table);
         }
 
-        $('#addData').submit(function(e){
-            e.preventDefault();
-            var fa = $(this);
-            
-            $.ajax({
-                url: 'article/addArticle',
-                type: 'POST',
-                data: new FormData(this),
-                dataType: 'JSON',
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                    $('#addModal').modal('hide');
-                    article_table.ajax.reload();
-                    fa[0].reset();
-                    $('.add-input').val('');
-                    toastr.success('Article Added');
-                },
-                error: function(response){
-                    $('.add-input').closest('input').removeClass('is-invalid')
-                    .addClass('is-valid').find('div.form-feedback').removeClass('invalid-feedback').addClass('valid-feedback')
-                    $.each(response.responseJSON.messages, function(key, value){
-                        var element = $('.add-input#' + key);
-                        element.closest('input')
-                        .removeClass('is-valid')
-                        .addClass('is-invalid');
+        function addArticle(status){
+            $('#addData').submit(function(e){
+                e.preventDefault();
+                var fa = $(this);
+                var formData = new FormData(this);
+                formData.append('status', status);
 
-                        $('div#'+ key +'Feedback.form-feedback')
-                        .addClass('invalid-feedback').empty().append(value)
-                        .removeClass('valid-feedback');
-                    });
-                }
-            })
-        });
+                $.ajax({
+                    url: 'article/addArticle',
+                    type: 'POST',
+                    data: formData,
+                    dataType: 'JSON',
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        $('#addModal').modal('hide');
+                        article_table.ajax.reload();
+                        fa[0].reset();
+                        $('.add-input').val('');
+                        toastr.success('Article Added');
+                        $('#content').summernote('code', '');
+                    },
+                    error: function(response){
+                        $('.add-input').closest('input').removeClass('is-invalid')
+                        .addClass('is-valid').find('div.form-feedback').removeClass('invalid-feedback').addClass('valid-feedback')
+                        $.each(response.responseJSON.messages, function(key, value){
+                            var element = $('.add-input#' + key);
+                            element.closest('input')
+                            .removeClass('is-valid')
+                            .addClass('is-invalid');
+
+                            $('div#'+ key +'Feedback.form-feedback')
+                            .addClass('invalid-feedback').empty().append(value)
+                            .removeClass('valid-feedback');
+                        });
+                    }
+                })
+            });
+        }
 
         function editArticle(id, name, slug){
             $('#editModal').on('shown.bs.modal', function(event){

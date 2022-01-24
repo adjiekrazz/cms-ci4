@@ -71,6 +71,7 @@ class Article extends BaseController
 			'category_id' => $this->request->getPost('category_id'),
 			'author_id' => user_id(),
 			'content' => $this->request->getPost('content'),
+			'status' => $this->request->getPost('status'),
 			'cover' => $this->request->getFile('cover'),
 		];
 		$this->validation->setRules($this->model->validationRules);
@@ -84,9 +85,11 @@ class Article extends BaseController
 		$articles_data['slug'] = $this->categoryModel->find($this->request->getPost('category_id'))['slug'];
 		
 		if (! $this->model->save($articles_data))
-			return $this->respond(null, 500, 'Database error. Unable to add article');
+			return $this->fail(new \CodeIgniter\Database\Exceptions\DatabaseException());
+
 		if (! $image->hasMoved())
 			$image->move(WRITEPATH . 'uploads', $fileName);
+
 		return $this->respondCreated($articles_data);
     }
 }
