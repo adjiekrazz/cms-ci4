@@ -92,4 +92,18 @@ class Article extends BaseController
 
 		return $this->respondCreated($articles_data);
     }
+
+	public function deleteArticle($id = null)
+    {
+        if ($id === null)
+            return $this->failNotFound('Article ID cannot be null');
+
+        if (! has_permission('delete'))
+            return $this->failForbidden("You don't have permissions to delete resources.");
+        
+        if ($this->model->delete($id))
+            return $this->respondDeleted($id);
+        
+        return $this->fail(new \CodeIgniter\Database\Exceptions\DatabaseException()); 
+    }
 }
