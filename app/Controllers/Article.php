@@ -26,7 +26,7 @@ class Article extends BaseController
 		$data = [
 			'categories' => $this->categoryModel->findAll()
 		];
-		return view('article/index', $data);
+		return view('article', $data);
 	}
 
 	public function getArticles()
