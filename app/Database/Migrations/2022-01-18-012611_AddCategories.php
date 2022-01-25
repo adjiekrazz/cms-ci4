@@ -23,6 +23,8 @@ class AddCategories extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => '128'
             ],
+            'created_at DATETIME DEFAULT CURRENT_TIMESTAMP',
+            'updated_at DATETIME ON UPDATE CURRENT_TIMESTAMP'
         ]);
 
         $this->forge->addKey('id', true);
