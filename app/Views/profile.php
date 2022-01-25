@@ -80,7 +80,7 @@
     <script type="text/javascript">
         $('#changePassword').submit(function(e){
             e.preventDefault();
-            var fa = $(this);
+            let fa = $(this);
             $.ajax({
                 url: 'profile/change-password',
                 type: 'POST',
@@ -94,7 +94,7 @@
                     $('.cp-input').closest('input.form-control').removeClass('is-invalid')
                     .addClass('is-valid').find('div.form-feedback').removeClass('invalid-feedback').addClass('valid-feedback')
                     $.each(response.responseJSON.messages, function(key, value){
-                        var element = $('.cp-input#' + key);
+                        let element = $('.cp-input#' + key);
                         element.closest('input.form-control')
                         .removeClass('is-valid')
                         .addClass('is-invalid');

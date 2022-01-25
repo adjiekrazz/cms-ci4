@@ -192,8 +192,8 @@
     <script src="<?= base_url('plugins/datatables-buttons/js/buttons.print.min.js') ?>"></script>
     <script src="<?= base_url('plugins/datatables-buttons/js/buttons.colVis.min.js') ?>"></script>
     <script>
-        var category_table = null;
-        var _deleteCategoryId = null;
+        let category_table = null;
+        let _deleteCategoryId = null;
         
         loadCategory();
 
@@ -210,9 +210,9 @@
                     { "data": "name" },
                     { "data": "slug" },
                     { "render": function(data, type, row){
-                        var a = "'"
-                        var s = "', '"
-                        var html = '<a href="#editModal" data-toggle="modal" onclick="return editCategory('+a+row.id+s+row.name+s+row.slug+a+')"><span class="badge bg-success" data-toggle="tooltip" data-placement="top" title="Edit Category">Edit</span></a>&nbsp;'
+                        let a = "'"
+                        let s = "', '"
+                        let html = '<a href="#editModal" data-toggle="modal" onclick="return editCategory('+a+row.id+s+row.name+s+row.slug+a+')"><span class="badge bg-success" data-toggle="tooltip" data-placement="top" title="Edit Category">Edit</span></a>&nbsp;'
                         html += '<a href="#deleteConfirmationModal" data-toggle="modal" onclick="return deleteConfirm('+a+row.id+s+row.name+a+')"><span class="badge bg-danger" data-toggle="tooltip" data-placement="top" title="Delete Category">Delete</span></a>'
                         return html
                     } }
@@ -220,7 +220,7 @@
             });
             
             $.fn.dataTable.Debounce = function ( table, options ) {
-                var tableId = table.settings()[0].sTableId;
+                let tableId = table.settings()[0].sTableId;
                 $('.dataTables_filter input[aria-controls="' + tableId + '"]') // select the correct input field
                     .unbind()
                     .bind('input', (delay(function (e) {
@@ -230,9 +230,9 @@
                 }
             
             function delay(callback, ms) {
-                var timer = 0;
+                let timer = 0;
                 return function () {
-                    var context = this, args = arguments;
+                    let context = this, args = arguments;
                     clearTimeout(timer);
                     timer = setTimeout(function () {
                         callback.apply(context, args);
@@ -240,12 +240,12 @@
                 };
             }
 
-            var debounce = new $.fn.dataTable.Debounce(category_table);
+            let debounce = new $.fn.dataTable.Debounce(category_table);
         }
 
         $('#addData').submit(function(e){
             e.preventDefault();
-            var fa = $(this);
+            let fa = $(this);
 
             $.ajax({
                 url: 'category/addCategory',
@@ -263,7 +263,7 @@
                     $('.add-input').closest('input.form-control').removeClass('is-invalid')
                     .addClass('is-valid').find('div.form-feedback').removeClass('invalid-feedback').addClass('valid-feedback')
                     $.each(response.responseJSON.messages, function(key, value){
-                        var element = $('.add-input#' + key);
+                        let element = $('.add-input#' + key);
                         element.closest('input.form-control')
                         .removeClass('is-valid')
                         .addClass('is-invalid');
@@ -278,7 +278,7 @@
 
         function editCategory(id, name, slug){
             $('#editModal').on('shown.bs.modal', function(event){
-                var modal = $(this);
+                let modal = $(this);
                 modal.find('input[id="id_edit"]').val(id)
                 modal.find('input[id="name_edit"]').val(name)
                 modal.find('input[id="slug_edit"]').val(slug)
@@ -287,7 +287,7 @@
 
         $('#editData').submit(function(e){
             e.preventDefault();
-            var fa = $(this);
+            let fa = $(this);
 
             $.ajax({
                 url: 'category/editCategory',
@@ -305,7 +305,7 @@
                     $('.edit-input').closest('input.form-control').removeClass('is-invalid')
                     .addClass('is-valid').find('div.form-feedback').removeClass('invalid-feedback').addClass('valid-feedback')
                     $.each(response.responseJSON.messages, function(key, value){
-                        var element = $('.edit-input#' + key +'_edit');
+                        let element = $('.edit-input#' + key +'_edit');
                         element.closest('input.form-control')
                         .removeClass('is-valid')
                         .addClass('is-invalid');
@@ -320,7 +320,7 @@
 
         function deleteConfirm(id, name){
             $('#deleteConfirmationModal').on('shown.bs.modal', function(event){
-                var modal = $(this);
+                let modal = $(this);
                 modal.find('div.target-edited').replaceWith("<div class='modal-body target-edited'>Are you sure delete category " + name + " ?</div>")
             });
             _deleteCategoryId = id;

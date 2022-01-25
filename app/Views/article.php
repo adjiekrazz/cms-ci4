@@ -240,8 +240,8 @@
     <script src="<?= base_url('plugins/summernote/summernote-bs4.min.js') ?>"></script>
     <script src="<?= base_url('plugins/bs-custom-file-input/bs-custom-file-input.min.js') ?>"></script>
     <script>
-        var article_table = null;
-        var _deleteArticleId = null;
+        let article_table = null;
+        let _deleteArticleId = null;
         
         loadArticle();
 
@@ -270,9 +270,10 @@
                     { "data": "cover" },
                     { "data": "status" },
                     { "render": (data, type, row) => {
-                        var a = "'"
-                        var s = "', '"
-                        var html = '<a href="#editModal" data-toggle="modal" onclick="return showEditArticleModal('+a+row.id+s+row.title+s+row.category_id+s+row.content+a+')"><span class="badge bg-success" data-toggle="tooltip" data-placement="top" title="Edit Article">Edit</span></a>&nbsp;'
+                        let content = escapeHtml(row.content);
+                        let a = "'"
+                        let s = "', '"
+                        let html = '<a href="#editModal" data-toggle="modal" onclick="return showEditArticleModal('+a+row.id+s+row.title+s+row.category_id+s+content+a+')"><span class="badge bg-success" data-toggle="tooltip" data-placement="top" title="Edit Article">Edit</span></a>&nbsp;'
                         html += '<a href="#deleteConfirmationModal" data-toggle="modal" onclick="return deleteConfirm('+a+row.id+s+row.title+a+')"><span class="badge bg-danger" data-toggle="tooltip" data-placement="top" title="Delete Article">Delete</span></a>'
                         return html
                     }}
@@ -280,7 +281,7 @@
             });
             
             $.fn.dataTable.Debounce = function ( table, options ) {
-                var tableId = table.settings()[0].sTableId;
+                let tableId = table.settings()[0].sTableId;
                 $('.dataTables_filter input[aria-controls="' + tableId + '"]') // select the correct input field
                     .unbind()
                     .bind('input', (delay(function (e) {
@@ -290,9 +291,9 @@
                 }
             
             function delay(callback, ms) {
-                var timer = 0;
+                let timer = 0;
                 return function () {
-                    var context = this, args = arguments;
+                    let context = this, args = arguments;
                     clearTimeout(timer);
                     timer = setTimeout(function () {
                         callback.apply(context, args);
@@ -300,7 +301,7 @@
                 };
             }
 
-            var debounce = new $.fn.dataTable.Debounce(article_table);
+            let debounce = new $.fn.dataTable.Debounce(article_table);
         }
 
         function addArticle(status){
@@ -328,7 +329,7 @@
                         $('.add-input').closest('input').removeClass('is-invalid')
                         .addClass('is-valid').find('div.form-feedback').removeClass('invalid-feedback').addClass('valid-feedback')
                         $.each(response.responseJSON.messages, function(key, value){
-                            var element = $('.add-input#' + key);
+                            let element = $('.add-input#' + key);
                             element.closest('input')
                             .removeClass('is-valid')
                             .addClass('is-invalid');
@@ -344,7 +345,7 @@
 
         function showEditArticleModal(id, title, category, content){
             $('#editModal').on('shown.bs.modal', function(event){
-                var modal = $(this);
+                let modal = $(this);
                 modal.find('input[id="id_edit"]').val(id);
                 modal.find('input[id="title_edit"]').val(title);
                 modal.find('select[id="category_edit"]').val(category);
@@ -377,7 +378,7 @@
                         $('.edit-input').closest('input.form-control').removeClass('is-invalid')
                         .addClass('is-valid').find('div.form-feedback').removeClass('invalid-feedback').addClass('valid-feedback')
                         $.each(response.responseJSON.messages, function(key, value){
-                            var element = $('.edit-input#' + key +'_edit');
+                            let element = $('.edit-input#' + key +'_edit');
                             element.closest('input.form-control')
                             .removeClass('is-valid')
                             .addClass('is-invalid');
@@ -393,7 +394,7 @@
 
         function deleteConfirm(id, name){
             $('#deleteConfirmationModal').on('shown.bs.modal', function(event){
-                var modal = $(this);
+                let modal = $(this);
                 modal.find('div.target-edited').replaceWith("<div class='modal-body target-edited'>Are you sure delete article " + name + " ?</div>")
             });
             _deleteArticleId = id;
