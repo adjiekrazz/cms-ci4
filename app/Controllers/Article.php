@@ -79,18 +79,63 @@ class Article extends BaseController
 		if (! $this->validation->run($articles_data))
 			return $this->failValidationErrors($this->validation->getErrors());
 		
-		$image = $articles_data['cover'];
-		$fileName = $image->getRandomName();
-		$articles_data['cover'] = $fileName;
+		$coverImage = $articles_data['cover'];
+		$cover = $coverImage->getRandomName();
+		$articles_data['cover'] = $cover;
 		$articles_data['slug'] = $this->categoryModel->find($this->request->getPost('category_id'))['slug'];
 		
 		if (! $this->model->save($articles_data))
 			return $this->fail(new \CodeIgniter\Database\Exceptions\DatabaseException());
 
-		if (! $image->hasMoved())
-			$image->move(WRITEPATH . 'uploads', $fileName);
+		if (! $coverImage->hasMoved())
+			$coverImage->move(WRITEPATH . 'uploads', $cover);
 
 		return $this->respondCreated($articles_data);
+    }
+
+	public function editArticle()
+    {
+        if (! has_permission('update'))
+            return $this->failForbidden("You don't have permissions to edit resources.");
+        
+        if (! $id = $this->request->getPost('id'))
+            return $this->fail('Article ID required.');
+
+        $articles_data = [
+            'title' => $this->request->getPost('title'),
+			'category_id' => $this->request->getPost('category_id'),
+			'author_id' => user_id(),
+			'content' => $this->request->getPost('content'),
+			'status' => $this->request->getPost('status'),
+        ];
+
+        $coverImage = $this->request->getFile('cover');
+        if ($coverImage->getSize() === 0) {
+            $this->validation->setRules($this->model->getValidationRules(['except' => ['cover']]));
+        } else {
+            $articles_data['cover'] = $coverImage;
+            $this->validation->setRules($this->model->getValidationRules());
+        }
+
+        if (!$this->validation->run($articles_data))
+            return $this->failValidationErrors($this->validation->getErrors());
+
+        if ($coverImage->getSize() !== 0) {
+            $cover = $coverImage->getRandomName();
+            $articles_data['cover'] = $cover;
+        }
+
+        $articles_data['slug'] = $this->categoryModel->find($this->request->getPost('category_id'))['slug'];
+
+        if (! $this->model->update($id, $articles_data))
+            return $this->fail(new \CodeIgniter\Database\Exceptions\DatabaseException()); 
+
+        if ($coverImage->getSize() !== 0){
+            if (! $coverImage->hasMoved())
+			    $coverImage->move(WRITEPATH . 'uploads', $cover);
+        }
+
+        return $this->respondUpdated($articles_data);
     }
 
 	public function deleteArticle($id = null)
