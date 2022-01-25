@@ -1,5 +1,5 @@
-# CRUD with CodeIgniter 4 Framework
-Mata kuliah Pemrograman Basis Data 2
+# Content Management System with CodeIgniter 4 Framework and Myth/Auth library
+Web Desain & Teknologi Internet
 
 ## Steps 
 - copy the env file into .env, then change the configuration that you needs like baseURL, or database
