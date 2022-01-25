@@ -58,6 +58,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="<?= base_url('page') ?>" class="nav-link <?= uri_string(true) == 'page' ? 'page' : '' ?>">
+              <i class="nav-icon fas fa-file-code"></i>
+              <p>
+                Page
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="<?= base_url('category') ?>" class="nav-link <?= uri_string(true) == 'category' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-tags"></i>
               <p>
