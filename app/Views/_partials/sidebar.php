@@ -82,6 +82,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="<?= base_url('setting') ?>" class="nav-link <?= uri_string(true) == 'setting' ? 'setting' : '' ?>">
+              <i class="nav-icon fas fa-passport"></i>
+              <p>
+                Site Setting
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="<?= base_url('about') ?>" class="nav-link <?= uri_string(true) == 'about' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-info-circle"></i>
               <p>
