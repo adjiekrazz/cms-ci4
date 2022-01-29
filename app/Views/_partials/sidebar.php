@@ -50,7 +50,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?= base_url('page') ?>" class="nav-link <?= uri_string(true) == 'page' ? 'page' : '' ?>">
+            <a href="<?= base_url('page') ?>" class="nav-link <?= uri_string(true) == 'page' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-file-code"></i>
               <p>
                 Page
@@ -74,7 +74,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?= base_url('setting') ?>" class="nav-link <?= uri_string(true) == 'setting' ? 'setting' : '' ?>">
+            <a href="<?= base_url('setting') ?>" class="nav-link <?= uri_string(true) == 'setting' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-passport"></i>
               <p>
                 Site Setting
