@@ -41,14 +41,6 @@
               </p>
             </a>
           </li>
-          <!--<li class="nav-item">
-            <a href="<?= base_url('book') ?>" class="nav-link <?= uri_string(true) == 'book' ? 'active' : '' ?>">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-                Book
-              </p>
-            </a>
-          </li>-->
           <li class="nav-item">
             <a href="<?= base_url('article') ?>" class="nav-link <?= uri_string(true) == 'article' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-file"></i>
