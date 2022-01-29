@@ -72,23 +72,31 @@ class Article extends BaseController
 			'author_id' => user_id(),
 			'content' => $this->request->getPost('content'),
 			'status' => $this->request->getPost('status'),
-			'cover' => $this->request->getFile('cover'),
 		];
-		$this->validation->setRules($this->model->validationRules);
+
+        $coverImage = $this->request->getFile('cover');
+        if ($coverImage->getSize() === 0) {
+            $this->validation->setRules($this->model->getValidationRules(['except' => ['cover']]));
+        } else {
+            $articles_data['cover'] = $coverImage;
+            $this->validation->setRules($this->model->getValidationRules());
+        }
 
 		if (! $this->validation->run($articles_data))
 			return $this->failValidationErrors($this->validation->getErrors());
 		
-		$coverImage = $articles_data['cover'];
-		$cover = $coverImage->getRandomName();
-		$articles_data['cover'] = $cover;
+        if ($coverImage->getSize() !== 0) {
+            $coverName = $coverImage->getRandomName();
+            $articles_data['cover'] = $coverName;
+
+            if (! $coverImage->hasMoved())
+			    $coverImage->move(WRITEPATH . 'uploads', $coverName);
+        }
+
 		$articles_data['slug'] = $this->categoryModel->find($this->request->getPost('category_id'))['slug'];
-		
+
 		if (! $this->model->save($articles_data))
 			return $this->fail(new \CodeIgniter\Database\Exceptions\DatabaseException());
-
-		if (! $coverImage->hasMoved())
-			$coverImage->move(WRITEPATH . 'uploads', $cover);
 
 		return $this->respondCreated($articles_data);
     }
@@ -123,17 +131,15 @@ class Article extends BaseController
         if ($coverImage->getSize() !== 0) {
             $cover = $coverImage->getRandomName();
             $articles_data['cover'] = $cover;
+
+            if (! $coverImage->hasMoved())
+			    $coverImage->move(WRITEPATH . 'uploads', $cover);
         }
 
         $articles_data['slug'] = $this->categoryModel->find($this->request->getPost('category_id'))['slug'];
 
         if (! $this->model->update($id, $articles_data))
             return $this->fail(new \CodeIgniter\Database\Exceptions\DatabaseException()); 
-
-        if ($coverImage->getSize() !== 0){
-            if (! $coverImage->hasMoved())
-			    $coverImage->move(WRITEPATH . 'uploads', $cover);
-        }
 
         return $this->respondUpdated($articles_data);
     }

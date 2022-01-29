@@ -29,7 +29,8 @@ class AddArticles extends Migration
             ],
             'cover' => [
                 'type' => 'VARCHAR',
-                'constraint' => '128'
+                'constraint' => '128',
+                'null' => true
             ],
             'author_id' => [
                 'type' => 'INT',

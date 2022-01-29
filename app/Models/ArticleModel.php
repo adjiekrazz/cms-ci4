@@ -46,7 +46,7 @@ class ArticleModel extends Model
 		],
 	];
 	protected $validationMessages   = [];
-	protected $skipValidation       = false;
+	protected $skipValidation       = true;
 	protected $cleanValidationRules = true;
 
 	// Callbacks

@@ -81,9 +81,9 @@
                             <div id="titleFeedback" class="form-feedback"></div>
                         </div>
                         <div class="form-group col-3">
-                            <label for="category" class="form-label">Category *</label>
-                            <select name="category_id" id="category" class="custom-select add-input">
-                                <option>Select Category</option>
+                            <label for="category_id" class="form-label">Category *</label>
+                            <select name="category_id" id="category_id" class="custom-select add-input">
+                                <option value="">Select Category</option>
                                 <?php
                                     foreach($categories as $category){
                                         echo "<option value='$category[id]'>$category[name]</option>";
@@ -110,8 +110,8 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-12" style="text-align: center;">
-                            <button name="status" class="btn btn-warning" onclick="addArticle('draft')">Draft</button>
-                            <button name="status" class="btn btn-success" onclick="addArticle('publish')">Publish</button>
+                            <button name="status" value="draft" class="btn btn-warning">Draft</button>
+                            <button name="status" value="publish" class="btn btn-success">Publish</button>
                         </div>
                     </div>
                     <?= form_close() ?>
@@ -148,9 +148,9 @@
                             <div id="titleFeedback" class="form-feedback"></div>
                         </div>
                         <div class="form-group col-3">
-                            <label for="category" class="form-label">Category *</label>
-                            <select name="category_id" id="category_edit" class="custom-select add-input">
-                                <option>Select Category</option>
+                            <label for="category_id" class="form-label">Category *</label>
+                            <select name="category_id" id="category_id_edit" class="custom-select add-input">
+                                <option value="">Select Category</option>
                                 <?php
                                     foreach($categories as $category){
                                         echo "<option value='$category[id]'>$category[name]</option>";
@@ -177,8 +177,8 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-12" style="text-align: center;">
-                            <button name="status" class="btn btn-warning" onclick="editArticle('draft')">Save As Draft</button>
-                            <button name="status" class="btn btn-success" onclick="editArticle('publish')">Save As Publish</button>
+                            <button name="status" class="btn btn-warning" value="draft">Save As Draft</button>
+                            <button name="status" class="btn btn-success" value="publish">Save As Publish</button>
                         </div>
                     </div>
                     <?= form_close() ?>
@@ -304,44 +304,43 @@
             let debounce = new $.fn.dataTable.Debounce(article_table);
         }
 
-        function addArticle(status){
-            $('#addData').submit(function(e){
-                e.preventDefault();
-                let formData = new FormData(this);
-                formData.set('content', $('#content').summernote('code'));
-                formData.append('status', status);
+        $('#addData').submit(function(e){
+            e.preventDefault();
+            let status = e.originalEvent.submitter.attributes.value.nodeValue;
+            let formData = new FormData(this);
+            formData.set('content', $('#content').summernote('code'));
+            formData.append('status', status);
 
-                $.ajax({
-                    url: 'article/addArticle',
-                    type: 'POST',
-                    data: formData,
-                    dataType: 'JSON',
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        $('#addModal').modal('hide');
-                        article_table.ajax.reload();
-                        $('.add-input').val('');
-                        toastr.success('Article Added');
-                        $('#content').summernote('code', '');
-                    },
-                    error: function(response){
-                        $('.add-input').closest('input').removeClass('is-invalid')
-                        .addClass('is-valid').find('div.form-feedback').removeClass('invalid-feedback').addClass('valid-feedback')
-                        $.each(response.responseJSON.messages, function(key, value){
-                            let element = $('.add-input#' + key);
-                            element.closest('input')
-                            .removeClass('is-valid')
-                            .addClass('is-invalid');
+            $.ajax({
+                url: 'article/addArticle',
+                type: 'POST',
+                data: formData,
+                dataType: 'JSON',
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    $('#addModal').modal('hide');
+                    article_table.ajax.reload();
+                    $('.add-input').val('');
+                    toastr.success('Article Added');
+                    $('#content').summernote('code', '');
+                },
+                error: function(response){
+                    $('.add-input').closest('input, select').removeClass('is-invalid')
+                    .addClass('is-valid').find('div.form-feedback').removeClass('invalid-feedback').addClass('valid-feedback')
+                    $.each(response.responseJSON.messages, function(key, value){
+                        let element = $('.add-input#' + key);
+                        element.closest('input, select')
+                        .removeClass('is-valid')
+                        .addClass('is-invalid');
 
-                            $('div#'+ key +'Feedback.form-feedback')
-                            .addClass('invalid-feedback').empty().append(value)
-                            .removeClass('valid-feedback');
-                        });
-                    }
-                })
-            });
-        }
+                        $('div#'+ key +'Feedback.form-feedback')
+                        .addClass('invalid-feedback').empty().append(value)
+                        .removeClass('valid-feedback');
+                    });
+                }
+            })
+        });
 
         function showEditArticleModal(id, title, category, content){
             $('#editModal').on('shown.bs.modal', function(event){
@@ -353,44 +352,43 @@
             });
         }
 
-        function editArticle(status){
-            $('#editData').submit(function(e){
-                e.preventDefault();
-                let formData = new FormData(this);
-                formData.set('content', $('#content_edit').summernote('code'));
-                formData.append('status', status);
+        $('#editData').submit(function(e){
+            e.preventDefault();
+            let status = e.originalEvent.submitter.attributes.value.nodeValue;
+            let formData = new FormData(this);
+            formData.set('content', $('#content_edit').summernote('code'));
+            formData.append('status', status);
 
-                $.ajax({
-                    url: 'article/editArticle',
-                    type: 'POST',
-                    data: formData,
-                    dataType: 'JSON',
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        $('#editModal').modal('hide');
-                        article_table.ajax.reload();
-                        $('.edit-input').val('');
-                        toastr.success('Article Updated');
-                        $('#content_edit').summernote('code', '');
-                    },
-                    error: function(response){
-                        $('.edit-input').closest('input.form-control').removeClass('is-invalid')
-                        .addClass('is-valid').find('div.form-feedback').removeClass('invalid-feedback').addClass('valid-feedback')
-                        $.each(response.responseJSON.messages, function(key, value){
-                            let element = $('.edit-input#' + key +'_edit');
-                            element.closest('input.form-control')
-                            .removeClass('is-valid')
-                            .addClass('is-invalid');
+            $.ajax({
+                url: 'article/editArticle',
+                type: 'POST',
+                data: formData,
+                dataType: 'JSON',
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    $('#editModal').modal('hide');
+                    article_table.ajax.reload();
+                    $('.edit-input').val('');
+                    toastr.success('Article Updated');
+                    $('#content_edit').summernote('code', '');
+                },
+                error: function(response){
+                    $('.edit-input').closest('input, select').removeClass('is-invalid')
+                    .addClass('is-valid').find('div.form-feedback').removeClass('invalid-feedback').addClass('valid-feedback')
+                    $.each(response.responseJSON.messages, function(key, value){
+                        let element = $('.edit-input#' + key +'_edit');
+                        element.closest('input, select')
+                        .removeClass('is-valid')
+                        .addClass('is-invalid');
 
-                            $('div#'+ key +'EditFeedback.form-feedback')
-                            .addClass('invalid-feedback').empty().append(value)
-                            .removeClass('valid-feedback');
-                        });
-                    }
-                })
-            });
-        }
+                        $('div#'+ key +'EditFeedback.form-feedback')
+                        .addClass('invalid-feedback').empty().append(value)
+                        .removeClass('valid-feedback');
+                    });
+                }
+            })
+        });
 
         function deleteConfirm(id, name){
             $('#deleteConfirmationModal').on('shown.bs.modal', function(event){
