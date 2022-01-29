@@ -19,7 +19,8 @@ class AddSettings extends Migration
 			],
 			'site_logo' => [
 				'type' => 'VARCHAR',
-				'constraint' => '255',
+				'constraint' => '128',
+				'null' => true
 			],
 			'facebook_link' => [
 				'type' => 'VARCHAR',
