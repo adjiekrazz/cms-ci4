@@ -69,7 +69,16 @@ class ArticleModel extends Model
 
 			if (! isset($authorId)) continue;
 
-			$data['author'] = $authorModel->find($authorId);
+			$author = $authorModel->find($authorId);
+			if ($author) {
+				$data['author'] = [
+					'email' => $author->email,
+					'username' => $author->username,
+					'id' => $author->id
+				];
+			} else {
+				$data['author'] = null;
+			}
 		}
 		
 		return $arrayData;
