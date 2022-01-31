@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Entities\User as UserEntity;
-use App\Models\AuthGroupModel;
+use App\Models\ArticleModel;
 use App\Models\UserModel;
 use CodeIgniter\API\ResponseTrait;
 
@@ -13,6 +13,7 @@ class User extends BaseController
 	use ResponseTrait;
 
 	protected $model;
+    protected $articleModel;
 	protected $validation;
     protected $authorization;
     protected $db;
@@ -20,6 +21,7 @@ class User extends BaseController
 	public function __construct()
 	{
 		$this->model = new UserModel();
+        $this->articleModel = new ArticleModel();
 		$this->validation = \Config\Services::validation();
         $this->authorization = service('authorization');
         $this->db = \Config\Database::connect();
@@ -28,7 +30,8 @@ class User extends BaseController
 	public function index()
 	{
         $data = [
-            'auth_groups' => $this->authorization->groups()
+            'auth_groups' => $this->authorization->groups(),
+            'users' => $this->model->findAll()
         ];
 		return view('user', $data);
 	}
@@ -163,9 +166,18 @@ class User extends BaseController
         if ($id === null)
             return $this->failNotFound('User ID cannot be null');
 
+        $transferToId = $this->request->getPost('transfer_ownership');
+        if ($id == $transferToId)
+            return $this->fail('Please choose other user for new articles ownership');
+
         try {
             $this->db->transBegin();
             $user = $this->model->find($id);
+            $articles = $this->articleModel->where('author_id', $id)->get();
+            foreach ($articles->getResult() as $article){
+                $article->author_id = $transferToId;
+                $this->articleModel->save($article);
+            }
             foreach ($user->roles as $role) {
                 $this->authorization->removeUserFromGroup($user->id, $role);
             }

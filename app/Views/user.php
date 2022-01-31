@@ -210,8 +210,26 @@
                     </button>
                 </div>
                 <?php if(has_permission('delete')): ?>
-                <div class="modal-body target-edited">
-                    Are you sure delete this user?
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 target-edited">
+                            Are you sure delete this user?
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label>Transfer articles ownership to :</label>
+                            <div class="select2-purple">
+                                <select class="form-control select2bs4" id="transfer_ownership" data-dropdown-css-class="select2-purple" style="width:100%">
+                                    <?php 
+                                        foreach($users as $user){
+                                            echo "<option value='$user->id'>$user->username</option>";
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -284,7 +302,9 @@
                         let a = "'"
                         let s = "', '"
                         let html = '<a href="#editModal" data-toggle="modal" onclick="return editUser('+a+row.id+s+row.username+s+row.email+s+roles+a+')"><span class="badge bg-success" data-toggle="tooltip" data-placement="top" title="Edit User">Edit</span></a>&nbsp;'
-                        html += '<a href="#deleteConfirmationModal" data-toggle="modal" onclick="return deleteConfirm('+a+row.id+s+row.username+a+')"><span class="badge bg-danger" data-toggle="tooltip" data-placement="top" title="Delete User">Delete</span></a>'
+                        if (row.id != <?= user()->id ?>){
+                            html += '<a href="#deleteConfirmationModal" data-toggle="modal" onclick="return deleteConfirm('+a+row.id+s+row.username+a+')"><span class="badge bg-danger" data-toggle="tooltip" data-placement="top" title="Delete User">Delete</span></a>'
+                        }
                         return html
                     } }
                 ]
@@ -406,21 +426,30 @@
         function deleteConfirm(id, name){
             $('#deleteConfirmationModal').on('shown.bs.modal', function(event){
                 let modal = $(this);
-                modal.find('div.target-edited').replaceWith("<div class='modal-body target-edited'>Are you sure delete user " + name + " ?</div>")
+                modal.find('div.target-edited').replaceWith("<div class='col-md-12 target-edited'>Are you sure delete user " + name + " ?</div>")
             });
             _deleteUserId = id;
         }
 
         function deleteUser(){
             if (_deleteUserId){
+                let formData = {
+                    'transfer_ownership': $('#transfer_ownership').select2('val')
+                };
+
                 $.ajax({
                     url: "user/deleteUser/" + _deleteUserId,
                     type: "POST",
                     dataType: "JSON",
-                    complete: function(response){
+                    data: formData,
+                    success: function(response){
                         user_table.ajax.reload();
                         $('#deleteConfirmationModal').modal('hide');
                         toastr.success('User Deleted');
+                    },
+                    error: (response) => {
+                        if (response.status == 400)
+                            toastr.error(response.responseJSON.messages.error)
                     }
                 })
             }
