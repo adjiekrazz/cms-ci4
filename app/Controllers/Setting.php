@@ -27,7 +27,7 @@ class Setting extends BaseController
 
 	public function editSetting()
     {
-        if (! has_permission('update'))
+        if (! has_permission('update-setting'))
             return $this->failForbidden("You don't have permissions to edit resources.");
         
         $settings_data = [

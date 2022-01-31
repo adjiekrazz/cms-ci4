@@ -31,7 +31,7 @@ class Article extends BaseController
 
 	public function getArticles()
 	{
-		if (! has_permission('read')){
+		if (! has_permission('read-article')){
             return $this->failForbidden("You don't have permissions to view resources.");
         }
         
@@ -63,7 +63,7 @@ class Article extends BaseController
 
 	public function addArticle()
     {
-        if (! has_permission('create'))
+        if (! has_permission('create-article'))
             return $this->failForbidden("You don't have permissions to create new resources.");
 
 		$articles_data = [
@@ -103,7 +103,7 @@ class Article extends BaseController
 
 	public function editArticle()
     {
-        if (! has_permission('update'))
+        if (! has_permission('update-article'))
             return $this->failForbidden("You don't have permissions to edit resources.");
         
         if (! $id = $this->request->getPost('id'))
@@ -149,7 +149,7 @@ class Article extends BaseController
         if ($id === null)
             return $this->failNotFound('Article ID cannot be null');
 
-        if (! has_permission('delete'))
+        if (! has_permission('delete-article'))
             return $this->failForbidden("You don't have permissions to delete resources.");
         
         if ($this->model->delete($id))

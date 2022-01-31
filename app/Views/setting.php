@@ -27,7 +27,7 @@
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-body">
-                        <?php if(has_permission('read')): ?>
+                        <?php if(has_permission('read-setting')): ?>
                         <?= form_open_multipart('setting/editSetting', 'id="editData" class="needs-validation"'); ?>
                         <div class="row">
                             <div class="form-group col-6">
@@ -86,7 +86,7 @@
                         </div>
                         <?= form_close() ?>
                         <?php else: ?>
-                        <span>You don't have permissions to view resources.</span>
+                        <span>You don't have permissions to view settings.</span>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -123,6 +123,8 @@
                     toastr.success('Setting Updated');
                 },
                 error: function(response){
+                    if (response.status == 403)
+                        toastr.error(response.responseJSON.messages.error)
                     $('.edit-input').closest('input.form-control').removeClass('is-invalid')
                     .addClass('is-valid').find('div.form-feedback').removeClass('invalid-feedback').addClass('valid-feedback')
                     $.each(response.responseJSON.messages, function(key, value){

@@ -41,6 +41,7 @@
               </p>
             </a>
           </li>
+          <?php if (has_permission('read-article')): ?>
           <li class="nav-item">
             <a href="<?= base_url('article') ?>" class="nav-link <?= uri_string(true) == 'article' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-file"></i>
@@ -49,6 +50,8 @@
               </p>
             </a>
           </li>
+          <?php endif;
+          if (has_permission('read-page')): ?>
           <li class="nav-item">
             <a href="<?= base_url('page') ?>" class="nav-link <?= uri_string(true) == 'page' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-file-code"></i>
@@ -57,6 +60,8 @@
               </p>
             </a>
           </li>
+          <?php endif;
+          if (has_permission('read-category')): ?>
           <li class="nav-item">
             <a href="<?= base_url('category') ?>" class="nav-link <?= uri_string(true) == 'category' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-tags"></i>
@@ -65,6 +70,7 @@
               </p>
             </a>
           </li>
+          <?php endif; ?>
           <li class="nav-item">
             <a href="<?= base_url('profile') ?>" class="nav-link <?= uri_string(true) == 'profile' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-user"></i>
@@ -73,6 +79,7 @@
               </p>
             </a>
           </li>
+          <?php if (has_permission('read-user')): ?>
           <li class="nav-item">
             <a href="<?= base_url('user') ?>" class="nav-link <?= uri_string(true) == 'user' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-users"></i>
@@ -81,6 +88,8 @@
               </p>
             </a>
           </li>
+          <?php endif;
+          if (has_permission('read-setting')): ?>
           <li class="nav-item">
             <a href="<?= base_url('setting') ?>" class="nav-link <?= uri_string(true) == 'setting' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-passport"></i>
@@ -89,6 +98,7 @@
               </p>
             </a>
           </li>
+          <?php endif; ?>
           <li class="nav-item">
             <a href="<?= base_url('about') ?>" class="nav-link <?= uri_string(true) == 'about' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-info-circle"></i>

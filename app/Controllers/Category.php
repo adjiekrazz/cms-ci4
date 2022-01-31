@@ -25,7 +25,7 @@ class Category extends BaseController
 
 	public function getCategories()
 	{
-		if (! has_permission('read')){
+		if (! has_permission('read-category')){
             return $this->failForbidden("You don't have permissions to view resources.");
         }
 
@@ -57,7 +57,7 @@ class Category extends BaseController
 
 	public function addCategory()
     {
-        if (! has_permission('create'))
+        if (! has_permission('create-category'))
             return $this->failForbidden("You don't have permissions to create new resources.");
 
 		$categories_data = $this->request->getRawInput();
@@ -74,7 +74,7 @@ class Category extends BaseController
 
     public function editCategory()
     {
-        if (! has_permission('update'))
+        if (! has_permission('update-category'))
             return $this->failForbidden("You don't have permissions to edit resources.");
         
         $categories_data = [
@@ -98,7 +98,7 @@ class Category extends BaseController
         if ($id === null)
             return $this->failNotFound('Category ID cannot be null');
 
-        if (! has_permission('delete'))
+        if (! has_permission('delete-category'))
             return $this->failForbidden("You don't have permissions to delete resources.");
         
         if ($this->model->delete($id))

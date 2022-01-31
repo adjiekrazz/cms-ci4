@@ -38,7 +38,7 @@ class User extends BaseController
 
 	public function getUsers()
 	{
-		if (! has_permission('read')){
+		if (! has_permission('read-user')){
             return $this->failForbidden("You don't have permissions to view resources.");
         }
 
@@ -70,7 +70,7 @@ class User extends BaseController
 
 	public function addUser()
     {
-        if (! has_permission('create'))
+        if (! has_permission('create-user'))
             return $this->failForbidden("You don't have permissions to create new resources.");
 
         $user_data = [
@@ -109,7 +109,7 @@ class User extends BaseController
 
     public function editUser()
     {
-        if (! has_permission('update'))
+        if (! has_permission('update-user'))
             return $this->failForbidden("You don't have permissions to edit resources.");
         
         $user_data = [
@@ -160,7 +160,7 @@ class User extends BaseController
 
     public function deleteUser($id = null)
     {
-        if (! has_permission('delete'))
+        if (! has_permission('delete-user'))
             return $this->failForbidden("You don't have permissions to delete resources.");
 
         if ($id === null)

@@ -25,7 +25,7 @@ class Page extends BaseController
 
 	public function getPages()
 	{
-		if (! has_permission('read')){
+		if (! has_permission('read-page')){
             return $this->failForbidden("You don't have permissions to view resources.");
         }
 
@@ -57,7 +57,7 @@ class Page extends BaseController
 
 	public function addPage()
     {
-        if (! has_permission('create'))
+        if (! has_permission('create-page'))
             return $this->failForbidden("You don't have permissions to create new resources.");
 
         $pages_data = [
@@ -79,7 +79,7 @@ class Page extends BaseController
 
     public function editPage()
     {
-        if (! has_permission('update'))
+        if (! has_permission('update-page'))
             return $this->failForbidden("You don't have permissions to edit resources.");
         
         $pages_data = [
@@ -105,7 +105,7 @@ class Page extends BaseController
         if ($id === null)
             return $this->failNotFound('Page ID cannot be null');
 
-        if (! has_permission('delete'))
+        if (! has_permission('delete-page'))
             return $this->failForbidden("You don't have permissions to delete resources.");
         
         if ($this->model->delete($id))

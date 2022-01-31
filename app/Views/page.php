@@ -28,7 +28,7 @@
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-body">
-                        <?php if(has_permission('read')): ?>
+                        <?php if(has_permission('read-page')): ?>
                         <div class="row mb-3">
                             <div class="col-12">
                                 <table id="page_table" class="table table-bordered table-sm" style="width:100%">
@@ -48,7 +48,7 @@
                             </div>
                         </div>
                         <?php else: ?>
-                        <span>You don't have permissions to view resources.</span>
+                        <span>You don't have permissions to view pages.</span>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                     </button>
                 </div>
 
-                <?php if(has_permission('create')): ?>
+                <?php if(has_permission('create-page')): ?>
                 <div class="modal-body">
                     <?= form_open('page/addPage', 'id="addData" class="needs-validation"'); ?>
                     <div class="row">
@@ -94,7 +94,7 @@
                 <?php else: ?>
                 <div class="modal-body">
                     <div class="modal-text">
-                        You don't have permissions to add resources.
+                        You don't have permissions to add pages.
                     </div>
                 </div>
                 <?php endif; ?>
@@ -112,7 +112,7 @@
                     </button>
                 </div>
 
-                <?php if(has_permission('update')): ?>
+                <?php if(has_permission('update-page')): ?>
                 <div class="modal-body">
                     <?= form_open('page/editPage', 'id="editData" class="needs-validation"'); ?>
                     <input type="hidden" name="id" id="id_edit">
@@ -141,7 +141,7 @@
                 <?php else: ?>
                 <div class="modal-body">
                     <div class="modal-text">
-                        You don't have permissions to edit resources.
+                        You don't have permissions to edit pages.
                     </div>
                 </div>
                 <?php endif; ?>
@@ -158,7 +158,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <?php if(has_permission('delete')): ?>
+                <?php if(has_permission('delete-page')): ?>
                 <div class="modal-body target-edited">
                     Are you sure delete this page?
                 </div>
@@ -169,7 +169,7 @@
                 <?php else: ?>
                 <div class="modal-body">
                     <div class="modal-text">
-                        You don't have permissions to delete resources.
+                        You don't have permissions to delete pages.
                     </div>
                 </div>
                 <?php endif ?>
