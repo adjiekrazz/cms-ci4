@@ -74,6 +74,14 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="<?= base_url('user') ?>" class="nav-link <?= uri_string(true) == 'user' ? 'active' : '' ?>">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Users
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="<?= base_url('setting') ?>" class="nav-link <?= uri_string(true) == 'setting' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-passport"></i>
               <p>
