@@ -42,6 +42,10 @@ class Article extends BaseController
         $order_field = $this->request->getVar('columns')[$order_index]['data'];
         $order_ascdesc = $this->request->getVar('order')[0]['dir'];
         $articles_query = $this->model->orderBy($order_field, $order_ascdesc);
+        if (! in_groups('admin')){
+            $articles_query = $articles_query->where('author_id', user()->id);
+        }
+
         if ($search) {
             $articles_query = $articles_query->like('name', $search);
             $articles_query = $articles_query->orLike('slug', $search);
