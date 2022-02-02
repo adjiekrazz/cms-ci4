@@ -128,7 +128,7 @@
     </div>
 
     <div class="modal fade" id="editModal" role="dialog" arial-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="editLabel">Edit Article</h5>
@@ -347,7 +347,7 @@
                 let modal = $(this);
                 modal.find('input[id="id_edit"]').val(id);
                 modal.find('input[id="title_edit"]').val(title);
-                modal.find('select[id="category_edit"]').val(category);
+                modal.find('select[id="category_id_edit"]').val(category);
                 modal.find('input[id="content_edit"]').summernote('code', content);
             });
         }
