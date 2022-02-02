@@ -34,7 +34,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="<?= base_url() ?>" class="nav-link <?= uri_string(true) == '' ? 'active' : '' ?>">
+            <a href="<?= base_url('backend') ?>" class="nav-link <?= uri_string(true) == 'backend' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -43,7 +43,7 @@
           </li>
           <?php if (has_permission('read-article')): ?>
           <li class="nav-item">
-            <a href="<?= base_url('article') ?>" class="nav-link <?= uri_string(true) == 'article' ? 'active' : '' ?>">
+            <a href="<?= base_url('backend/article') ?>" class="nav-link <?= uri_string(true) == 'backend/article' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-file"></i>
               <p>
                 Article
@@ -53,7 +53,7 @@
           <?php endif;
           if (has_permission('read-page')): ?>
           <li class="nav-item">
-            <a href="<?= base_url('page') ?>" class="nav-link <?= uri_string(true) == 'page' ? 'active' : '' ?>">
+            <a href="<?= base_url('backend/page') ?>" class="nav-link <?= uri_string(true) == 'backend/page' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-file-code"></i>
               <p>
                 Page
@@ -63,7 +63,7 @@
           <?php endif;
           if (has_permission('read-category')): ?>
           <li class="nav-item">
-            <a href="<?= base_url('category') ?>" class="nav-link <?= uri_string(true) == 'category' ? 'active' : '' ?>">
+            <a href="<?= base_url('backend/category') ?>" class="nav-link <?= uri_string(true) == 'backend/category' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-tags"></i>
               <p>
                 Category
@@ -72,7 +72,7 @@
           </li>
           <?php endif; ?>
           <li class="nav-item">
-            <a href="<?= base_url('profile') ?>" class="nav-link <?= uri_string(true) == 'profile' ? 'active' : '' ?>">
+            <a href="<?= base_url('backend/profile') ?>" class="nav-link <?= uri_string(true) == 'backend/profile' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-user"></i>
               <p>
                 Account
@@ -81,7 +81,7 @@
           </li>
           <?php if (has_permission('read-user')): ?>
           <li class="nav-item">
-            <a href="<?= base_url('user') ?>" class="nav-link <?= uri_string(true) == 'user' ? 'active' : '' ?>">
+            <a href="<?= base_url('backend/user') ?>" class="nav-link <?= uri_string(true) == 'backend/user' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Users
@@ -91,7 +91,7 @@
           <?php endif;
           if (has_permission('read-setting')): ?>
           <li class="nav-item">
-            <a href="<?= base_url('setting') ?>" class="nav-link <?= uri_string(true) == 'setting' ? 'active' : '' ?>">
+            <a href="<?= base_url('backend/setting') ?>" class="nav-link <?= uri_string(true) == 'backend/setting' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-passport"></i>
               <p>
                 Site Setting
@@ -100,7 +100,7 @@
           </li>
           <?php endif; ?>
           <li class="nav-item">
-            <a href="<?= base_url('about') ?>" class="nav-link <?= uri_string(true) == 'about' ? 'active' : '' ?>">
+            <a href="<?= base_url('backend/about') ?>" class="nav-link <?= uri_string(true) == 'backend/about' ? 'active' : '' ?>">
               <i class="nav-icon fas fa-info-circle"></i>
               <p>
                 About

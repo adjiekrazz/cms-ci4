@@ -18,11 +18,11 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php'))
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
+$routes->setDefaultController('Welcome');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
-$routes->setAutoRoute(true);
+$routes->setAutoRoute(false);
 
 /*
  * --------------------------------------------------------------------
@@ -32,21 +32,10 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Dashboard::index');
-$routes->get('/book', 'Book::index');
-$routes->get('/category', 'Category::index');
-$routes->get('/about', 'About::index');
-$routes->get('/profile', 'Profile::index');
-$routes->post('/profile/change-password', 'Profile::changePassword');
-$routes->get('/page', 'Page::index');
-$routes->get('/user', 'User::index');
-$routes->get('/setting', 'Setting::index');
-$routes->match(['get', 'post'], 'ImageRender/(:segment)', 'ImageRender::index/$1');
 
-/*
- * Myth:Auth routes file.
- */
-$routes->group('', ['namespace' => 'App\Controllers'], function ($routes) {
+$routes->group('', ['namespace' => 'App\Controllers'], function($routes) {
+    $routes->get('/', 'Welcome::index');
+
     // Login/out
     $routes->get('login', 'AuthController::login', ['as' => 'login']);
     $routes->post('login', 'AuthController::attemptLogin');
@@ -65,6 +54,43 @@ $routes->group('', ['namespace' => 'App\Controllers'], function ($routes) {
     $routes->post('forgot', 'AuthController::attemptForgot');
     $routes->get('reset-password', 'AuthController::resetPassword', ['as' => 'reset-password']);
     $routes->post('reset-password', 'AuthController::attemptReset');
+
+    $routes->group('backend', ['filter' => 'login'],function($routes){
+        $routes->get('', 'Dashboard::index');
+        // article
+        $routes->get('article', 'Article::index');
+        $routes->post('article/getArticles', 'Article::getArticles');
+        $routes->post('article/addArticle', 'Article::addArticle');
+        $routes->post('article/editArticle', 'Article::editArticle');
+        $routes->post('article/deleteArticle/(:num)', 'Article::deleteArticle/$1');
+        // category
+        $routes->get('category', 'Category::index');
+        $routes->post('category/getCategories', 'Category::getCategories');
+        $routes->post('category/addCategory', 'Category::addCategory');
+        $routes->post('category/editCategory', 'Category::editCategory');
+        $routes->post('category/deleteCategory/(:num)', 'Category::deleteCategory/$1');
+        // page
+        $routes->get('page', 'Page::index');
+        $routes->post('page/getPages', 'Page::getPages');
+        $routes->post('page/addPage', 'Page::addPage');
+        $routes->post('page/editPage', 'Page::editPage');
+        $routes->post('page/deletePage/(:num)', 'Page::deletePage/$1');
+        // user
+        $routes->get('user', 'User::index');
+        $routes->post('user/getUsers', 'User::getUsers');
+        $routes->post('user/addUser', 'User::addUser');
+        $routes->post('user/editUser', 'User::editUser');
+        $routes->post('user/deleteUser/(:num)', 'User::deleteUser/$1');
+        // setting
+        $routes->get('setting', 'Setting::index');
+        $routes->post('setting/editSetting', 'Setting::editSetting');
+
+        $routes->get('profile', 'Profile::index');
+        $routes->post('profile/change-password', 'Profile::changePassword');
+        
+        $routes->get('about', 'About::index');
+        $routes->match(['get', 'post'], 'ImageRender/(:segment)', 'ImageRender::index/$1');
+    });
 });
 
 /*
