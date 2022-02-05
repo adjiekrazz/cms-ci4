@@ -15,13 +15,10 @@ class AddCategories extends Migration
                 'unsigned' => true,
                 'auto_increment' => true
             ],            
-            'name' => [
-                'type' => 'VARCHAR',
-                'constraint' => '128'
-            ],
+            'name VARCHAR(255) NOT NULL UNIQUE',
             'slug' => [
                 'type' => 'VARCHAR',
-                'constraint' => '128'
+                'constraint' => '255'
             ],
             'created_at DATETIME DEFAULT CURRENT_TIMESTAMP',
             'updated_at DATETIME ON UPDATE CURRENT_TIMESTAMP'

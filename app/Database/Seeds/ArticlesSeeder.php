@@ -25,7 +25,7 @@ class ArticlesSeeder extends Seeder
 		$articles = [
 			[
 				'title' => 'Auth Package untuk Codeigniter 4',
-				'slug' => $this->categoryModel->where('name', 'Tutorial Codeigniter 4')->first()['slug'],
+				'slug' => strtolower(url_title('Auth Package untuk Codeigniter 4')),
 				'content' => '<p style="text-align: left;">Daftar Isi :</p><ol><li style="text-align: left;">Apa itu Codeigniter 4 ?</li>'
 							. '<li style="text-align: left;">Apa itu Myth-Auth ?</li><li style="text-align: left;">Bagaimana cara install myth-auth di Codeigniter 4?</li></ol>',
 				'cover' => null,
@@ -35,7 +35,7 @@ class ArticlesSeeder extends Seeder
 			],
 			[
 				'title' => 'Tutorial Membuat Replikasi di MySQL',
-				'slug' => $this->categoryModel->where('name', 'Tutorial MySQL')->first()['slug'],
+				'slug' => strtolower(url_title('Tutorial Membuat Replikasi di MySQL')),
 				'content' => '<p style="text-align: left;">Daftar Isi :</p><ol><li style="text-align: left;">Apa itu MySQL ?</li>'
 							. '<li style="text-align: left;">Apa itu Replikasi ?</li><li style="text-align: left;">Bagaimana membuat replikasi database secara otomatis di MySQL ?</li></ol>',
 				'cover' => null,
@@ -45,7 +45,7 @@ class ArticlesSeeder extends Seeder
 			],
 			[
 				'title' => 'Tutorial Eloquent di Laravel',
-				'slug' => $this->categoryModel->where('name', 'Tutorial PHP')->first()['slug'],
+				'slug' => strtolower(url_title('Tutorial Eloquent di Laravel')),
 				'content' => '<p style="text-align: left;">Daftar Isi :</p><ol><li style="text-align: left;">Apa itu Eloquent ?</li>'
 							. '<li style="text-align: left;">Apa itu Laravel ?</li><li style="text-align: left;">Bagaimana menggunakan Eloquent di Laravel ?</li></ol>',
 				'cover' => null,
@@ -55,7 +55,7 @@ class ArticlesSeeder extends Seeder
 			],
 			[
 				'title' => 'Standar PSR dalam PHP',
-				'slug' => $this->categoryModel->where('name', 'Tutorial PHP')->first()['slug'],
+				'slug' => strtolower(url_title('Standar PSR dalam PHP')),
 				'content' => '<p style="text-align: left;">Daftar Isi :</p><ol><li style="text-align: left;">Apa itu PSR ?</li>'
 							. '<li style="text-align: left;">Apa itu PHP ?</li><li style="text-align: left;">Apa saja standar PSR yang wajib diterapkan dalam PHP ?</li></ol>',
 				'cover' => null,

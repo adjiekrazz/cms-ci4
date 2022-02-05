@@ -60,7 +60,11 @@ class Category extends BaseController
         if (! has_permission('create-category'))
             return $this->failForbidden("You don't have permissions to create new resources.");
 
-		$categories_data = $this->request->getRawInput();
+		$categories_data = [
+            'name' => $this->request->getVar('name'),
+            'slug' => strtolower(url_title($this->request->getVar('name')))
+        ];
+        
 		$this->validation->setRules($this->model->validationRules);
 
 		if (! $this->validation->run($categories_data))
@@ -79,7 +83,7 @@ class Category extends BaseController
         
         $categories_data = [
             'name' => $this->request->getVar('name'),
-            'slug' => $this->request->getVar('slug'),
+            'slug' => strtolower(url_title($this->request->getVar('name')))
         ];
 
         $this->validation->setRules($this->model->validationRules);

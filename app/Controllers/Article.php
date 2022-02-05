@@ -97,7 +97,7 @@ class Article extends BaseController
 			    $coverImage->move(WRITEPATH . 'uploads', $coverName);
         }
 
-		$articles_data['slug'] = $this->categoryModel->find($this->request->getPost('category_id'))['slug'];
+		$articles_data['slug'] = strtolower(url_title($articles_data['title']));
 
 		if (! $this->model->save($articles_data))
 			return $this->fail(new \CodeIgniter\Database\Exceptions\DatabaseException());
@@ -140,7 +140,7 @@ class Article extends BaseController
 			    $coverImage->move(WRITEPATH . 'uploads', $cover);
         }
 
-        $articles_data['slug'] = $this->categoryModel->find($this->request->getPost('category_id'))['slug'];
+        $articles_data['slug'] = strtolower(url_title($articles_data['title']));
 
         if (! $this->model->update($id, $articles_data))
             return $this->fail(new \CodeIgniter\Database\Exceptions\DatabaseException()); 

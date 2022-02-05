@@ -27,11 +27,7 @@ class CategoryModel extends Model
 	protected $validationRules      = [
 		'name' => [
 			'label' => 'Name',
-			'rules'  => 'required|string'
-		],
-		'slug' => [
-			'label' => 'Slug',
-			'rules'  => 'required|alpha_dash'
+			'rules'  => 'required|string|is_unique[categories.name,id,{id}]'
 		],
 	];
 	protected $validationMessages   = [];

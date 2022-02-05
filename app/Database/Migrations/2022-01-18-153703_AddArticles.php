@@ -15,13 +15,10 @@ class AddArticles extends Migration
                 'unsigned' => true,
                 'auto_increment' => true
             ],
-            'title' => [
-                'type' => 'VARCHAR',
-                'constraint' => '128'
-            ],
+            'title VARCHAR(255) NOT NULL UNIQUE',
             'slug' => [
                 'type' => 'VARCHAR',
-                'constraint' => '128'
+                'constraint' => '255'
             ],
             'content' => [
                 'type' => 'TEXT',
