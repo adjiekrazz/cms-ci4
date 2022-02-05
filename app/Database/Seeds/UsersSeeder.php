@@ -6,7 +6,7 @@ use CodeIgniter\Database\Seeder;
 use Myth\Auth\Models\UserModel;
 use Myth\Auth\Entities\User;
 
-class UserSeeder extends Seeder
+class UsersSeeder extends Seeder
 {
 	public function run()
 	{
