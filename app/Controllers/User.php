@@ -75,6 +75,7 @@ class User extends BaseController
 
         $user_data = [
             'email' => $this->request->getPost('email'),
+            'name' => $this->request->getPost('name'),
             'username' => $this->request->getPost('username'),
             'password' => $this->request->getPost('password'),
             'password_confirmation' => $this->request->getPost('password_confirmation'),
@@ -83,6 +84,7 @@ class User extends BaseController
 
 		$this->validation->setRules([
             'email' => 'required|valid_email|is_unique[users.email,id,{id}]',
+            'name' => 'string',
             'username' => 'required|alpha_numeric_punct|min_length[3]|max_length[30]|is_unique[users.username,id,{id}]',
             'password' => 'required',
             'password_confirmation' => 'required|matches[password]',
@@ -117,6 +119,7 @@ class User extends BaseController
 			'password' => $this->request->getPost('password'),
 			'password_confirmation' => $this->request->getPost('password_confirmation'),
             'auth_groups' => $this->request->getPost('auth_groups'),
+            'name' => $this->request->getPost('name'),
         ];
 
         $this->validation->setRules([
@@ -129,6 +132,7 @@ class User extends BaseController
             return $this->failValidationErrors($this->validation->getErrors());
 
         $user = $this->model->find($user_data['id']);
+        $user->name = $user_data['name'];
 
         if ($user_data['password'])
             $user->setPassword($user_data['password']);

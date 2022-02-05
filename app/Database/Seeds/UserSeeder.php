@@ -171,24 +171,28 @@ class UserSeeder extends Seeder
          */
         $dummy_user_admin = [
             'email' => 'admin@example.com',
+            'name' => 'Arif Purnomo Aji',
             'username' => 'admin',
             'password' => 'password',
         ];
 
         $dummy_user_maintainer = [
             'email' => 'maintainer@example.com',
+            'name' => 'James Sullivan',
             'username' => 'maintainer',
             'password' => 'password',
         ];
 
         $dummy_user_writer = [
             'email' => 'writer@example.com',
+            'name' => 'Brian Haner Jr.',
             'username' => 'writer',
             'password' => 'password',
         ];
 
         $dummy_user_member = [
             'email' => 'member@example.com',
+            'name' => 'Dul Zkaedi',
             'username' => 'member',
             'password' => 'password',
         ];

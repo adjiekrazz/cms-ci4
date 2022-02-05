@@ -265,7 +265,7 @@
                     }},
                     { "data": "created_at" },
                     { "data": "title" },
-                    { "data": "author.username" },
+                    { "data": "author.name" },
                     { "data": "category.name" },
                     { "data": "cover" },
                     { "data": "status" },

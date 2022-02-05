@@ -14,7 +14,7 @@
           <img src="<?= base_url('img/user2-160x160.jpg') ?>" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="<?= base_url('profile') ?>" class="d-block"><?= user()->username ?></a>
+          <a href="<?= base_url('profile') ?>" class="d-block"><?= user()->name ?></a>
         </div>
       </div>
 

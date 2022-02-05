@@ -80,7 +80,9 @@
                     <div class="col-sm-12 col-md-6">
                         <div class="card">
                             <div class="card-body">
-                                <h5>Welcome, <?= user()->username . ' [' . user()->email . ']' ?></h5>
+                                <h5>Welcome back!</h5>
+                                <i class="fas fa-user fa-fw"></i> <?= user()->name ?> <br>
+                                <i class="fas fa-at fa-fw"></i> <?= user()->email ?>
                             </div>
                         </div>
                     </div>

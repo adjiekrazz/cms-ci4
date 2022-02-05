@@ -37,6 +37,7 @@
                                         <tr>
                                             <th>Username</th>
                                             <th>Email</th>
+                                            <th>Name</th>
                                             <th>Group</th>
                                             <th>Created At</th>
                                             <th>Actions</th>
@@ -98,6 +99,11 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-6">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control add-input" id="name" name="name" autocomplete="off">
+                            <div id="nameFeedback" class="form-feedback"></div>
+                        </div>
+                        <div class="form-group col-6">
                             <label for="auth_groups" class="form-label">Roles</label>
                             <div class="select2-purple">
                                 <select class="form-control select2 add-input" multiple="multiple" id="auth_groups" name="auth_groups" data-dropdown-css-class="select2-purple" style="width:100%">
@@ -146,12 +152,12 @@
                     <div class="row">
                         <div class="form-group col-6">
                             <label for="username_edit" class="form-label">Username *</label>
-                            <input type="text" class="form-control edit-input" id="username_edit" name="username" autocomplete="off">
+                            <input type="text" class="form-control edit-input" id="username_edit" name="username" autocomplete="off" readonly>
                             <div id="usernameEditFeedback" class="form-feedback"></div>
                         </div>
                         <div class="form-group col-6">
                             <label for="email_edit" class="form-label">Email *</label>
-                            <input type="text" class="form-control edit-input" id="email_edit" name="email" autocomplete="off">
+                            <input type="text" class="form-control edit-input" id="email_edit" name="email" autocomplete="off" readonly>
                             <div id="emailEditFeedback" class="form-feedback"></div>
                         </div>
                     </div>
@@ -168,6 +174,11 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="form-group col-6">
+                            <label for="name_edit" class="form-label">Name</label>
+                            <input type="text" class="form-control edit-input" id="name_edit" name="name" autocomplete="off">
+                            <div id="nameEditFeedback" class="form-feedback"></div>
+                        </div>
                         <div class="form-group col-6">
                             <label for="auth_groups_edit" class="form-label">Roles</label>
                             <div class="select2-purple">
@@ -223,7 +234,7 @@
                                 <select class="form-control select2bs4" id="transfer_ownership" data-dropdown-css-class="select2-purple" style="width:100%">
                                     <?php 
                                         foreach($users as $user){
-                                            echo "<option value='$user->id'>$user->username</option>";
+                                            echo "<option value='$user->id'>$user->name [$user->username]</option>";
                                         }
                                     ?>
                                 </select>
@@ -284,6 +295,7 @@
                 "columns": [
                     { "data": "username" },
                     { "data": "email" },
+                    { "data": "name" },
                     { "render": (data, type, row) => {
                         let roles = [];
                         Object.keys(row.roles).forEach((key) => {
@@ -293,7 +305,7 @@
                     }},
                     { "render": (data, type, row) => {
                         return new Date(row.created_at.date).toLocaleDateString('id-ID') + ' ' + new Date(row.created_at.date).toLocaleTimeString('en-GB');
-                    } },
+                    }},
                     { "render": (data, type, row) => {
                         let roles = [];
                         Object.keys(row.roles).forEach((key) => {
@@ -301,12 +313,12 @@
                         })
                         let a = "'"
                         let s = "', '"
-                        let html = '<a href="#editModal" data-toggle="modal" onclick="return editUser('+a+row.id+s+row.username+s+row.email+s+roles+a+')"><span class="badge bg-success" data-toggle="tooltip" data-placement="top" title="Edit User">Edit</span></a>&nbsp;'
+                        let html = '<a href="#editModal" data-toggle="modal" onclick="return editUser('+a+row.id+s+row.username+s+row.email+s+roles+s+row.name+a+')"><span class="badge bg-success" data-toggle="tooltip" data-placement="top" title="Edit User">Edit</span></a>&nbsp;'
                         if (row.id != <?= user()->id ?>){
-                            html += '<a href="#deleteConfirmationModal" data-toggle="modal" onclick="return deleteConfirm('+a+row.id+s+row.username+a+')"><span class="badge bg-danger" data-toggle="tooltip" data-placement="top" title="Delete User">Delete</span></a>'
+                            html += '<a href="#deleteConfirmationModal" data-toggle="modal" onclick="return deleteConfirm('+a+row.id+s+row.username+s+row.name+a+')"><span class="badge bg-danger" data-toggle="tooltip" data-placement="top" title="Delete User">Delete</span></a>'
                         }
                         return html
-                    } }
+                    }}
                 ]
             });
             
@@ -372,7 +384,7 @@
             })
         });
 
-        function editUser(id, username, email, roles){
+        function editUser(id, username, email, roles, name){
             let arrayRoles = roles.split(',');
             $('#editModal').on('shown.bs.modal', function(event){
                 let modal = $(this);
@@ -380,6 +392,7 @@
                 modal.find('input[id="username_edit"]').val(username);
                 modal.find('input[id="email_edit"]').val(email);
                 modal.find('select[id="auth_groups_edit"]').val(arrayRoles).trigger('change');
+                modal.find('input[id="name_edit"]').val(name);
             });
         }
 
@@ -423,7 +436,7 @@
             })
         });
 
-        function deleteConfirm(id, name){
+        function deleteConfirm(id, username, name){
             $('#deleteConfirmationModal').on('shown.bs.modal', function(event){
                 let modal = $(this);
                 modal.find('div.target-edited').replaceWith("<div class='col-md-12 target-edited'>Are you sure delete user " + name + " ?</div>")

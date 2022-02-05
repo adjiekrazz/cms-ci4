@@ -73,6 +73,7 @@ class ArticleModel extends Model
 			if ($author) {
 				$data['author'] = [
 					'email' => $author->email,
+					'name' => $author->name,
 					'username' => $author->username,
 					'id' => $author->id
 				];

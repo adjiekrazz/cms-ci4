@@ -37,6 +37,10 @@
                                     <input type="text" class="form-control" id="username" readonly value="<?= $user->username ?>">
                                 </div>
                                 <div class="mb-3">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" class="form-control" id="name" readonly value="<?= $user->name ?>">
+                                </div>
+                                <div class="mb-3">
                                     <label for="registration_date" class="form-label">Registration Date</label>
                                     <input type="text" class="form-control" id="registration_date" readonly value="<?= $user->created_at ?>">
                                 </div>
