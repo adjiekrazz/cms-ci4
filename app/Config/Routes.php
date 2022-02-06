@@ -55,6 +55,17 @@ $routes->group('', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->get('reset-password', 'AuthController::resetPassword', ['as' => 'reset-password']);
     $routes->post('reset-password', 'AuthController::attemptReset');
 
+    // Routes for search
+    $routes->get('search', 'Welcome::search');
+    $routes->get('search/(:any)', 'Welcome::search/$1');
+    $routes->get('search/(:any)/(:num)', 'Welcome::search/$1/$2');
+
+    // Routes for blog
+    $routes->get('blog', 'Welcome::blog');
+    $routes->get('blog/(:num)', 'Welcome::blog/$1');
+    // Routes for page
+    $routes->get('page/(:any)', 'Welcome::page/$1');
+
     $routes->group('backend', ['filter' => 'login'],function($routes){
         $routes->get('', 'Dashboard::index');
         // article
@@ -91,6 +102,9 @@ $routes->group('', ['namespace' => 'App\Controllers'], function($routes) {
         $routes->get('about', 'About::index');
         $routes->match(['get', 'post'], 'ImageRender/(:segment)', 'ImageRender::index/$1');
     });
+
+    // Routes for articles
+    $routes->get('(:any)', 'Welcome::single/$1');
 });
 
 /*
