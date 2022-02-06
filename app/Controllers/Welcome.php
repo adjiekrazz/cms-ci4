@@ -67,4 +67,22 @@ class Welcome extends BaseController
 
 		return view('frontend/page', $data);
 	}
+
+	public function category($slug)
+	{
+		$category = $this->categoryModel->where('slug', 'category/' . $slug)->first();
+
+		if(! $category)
+			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+		
+		$data = [
+			'setting' => $this->settingModel->first(),
+			'feed_articles' => $this->articleModel->where('status', 'publish')->orderBy('rand()')->findAll(5, 0),
+			'categories' => $this->categoryModel->findAll(),
+			'articles' => $this->articleModel->where('category_id', $category['id'])->where('status', 'publish')->paginate(3, 'articles'),
+			'articles_pager' => $this->articleModel->pager,
+		];
+
+		return view('frontend/category', $data);
+	}
 }

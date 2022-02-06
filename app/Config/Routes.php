@@ -60,6 +60,9 @@ $routes->group('', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->get('search/(:any)', 'Welcome::search/$1');
     $routes->get('search/(:any)/(:num)', 'Welcome::search/$1/$2');
 
+    // Routes for category
+    $routes->get('category/(:any)', 'Welcome::category/$1');
+    $routes->get('category/(:any)/(:num)', 'Welcome::category/$1/$2');
     // Routes for blog
     $routes->get('blog', 'Welcome::blog');
     $routes->get('blog/(:num)', 'Welcome::blog/$1');
