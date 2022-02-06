@@ -30,7 +30,7 @@ class ArticleModel extends Model
 	protected $validationRules      = [
 		'title' => [
 			'label' => 'Title',
-			'rules'  => 'required|string|is_unique[articles.title,id,{id}'
+			'rules'  => 'required|string|is_unique[articles.title,id,{id}]'
 		],
 		'category_id' => [
 			'label' => 'Category',
