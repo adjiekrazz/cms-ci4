@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <title><?= $setting->site_name . ' - ' . $setting->site_description ?></title>
-  <meta content="<?= isset($page['title']) ? $article['page'] : $setting->site_name ?>" name="keywords">
+  <meta content="<?= isset($page['title']) ? $page['title'] : $setting->site_name ?>" name="keywords">
   <meta content="<?= isset($page['content']) ? substr(strip_tags($page['content']), 0, 100) : $setting->site_description ?>" name="description">
     <?= view('frontend/_partials/header') ?>
 </head>
@@ -31,7 +31,7 @@
   <section class="blog-wrapper sect-pt4" id="blog">
     <div class="container">
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
           <?php 
             if ($page === null) {
           ?>
