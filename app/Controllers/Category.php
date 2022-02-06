@@ -62,7 +62,7 @@ class Category extends BaseController
 
 		$categories_data = [
             'name' => $this->request->getVar('name'),
-            'slug' => strtolower(url_title($this->request->getVar('name')))
+            'slug' => 'category/' . strtolower(url_title($this->request->getVar('name')))
         ];
         
 		$this->validation->setRules($this->model->validationRules);
@@ -84,7 +84,7 @@ class Category extends BaseController
         $categories_data = [
             'id' => $this->request->getVar('id'),
             'name' => $this->request->getVar('name'),
-            'slug' => strtolower(url_title($this->request->getVar('name')))
+            'slug' => 'category/' . strtolower(url_title($this->request->getVar('name')))
         ];
 
         $this->validation->setRules($this->model->validationRules);
