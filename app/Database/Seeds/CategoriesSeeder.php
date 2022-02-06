@@ -11,15 +11,15 @@ class CategoriesSeeder extends Seeder
 		$categories = [
 			[
 				'name' => 'Tutorial Codeigniter 4',
-				'slug' => strtolower(url_title('Tutorial Codeigniter 4'))
+				'slug' => 'category/' . strtolower(url_title('Tutorial Codeigniter 4'))
 			],
 			[
 				'name' => 'Tutorial PHP',
-				'slug' => strtolower(url_title('Tutorial PHP'))
+				'slug' => 'category/' . strtolower(url_title('Tutorial PHP'))
 			],
 			[
 				'name' => 'Tutorial MySQL',
-				'slug' => strtolower(url_title('Tutorial MySQL'))
+				'slug' => 'category/' . strtolower(url_title('Tutorial MySQL'))
 			],
 		];
 
