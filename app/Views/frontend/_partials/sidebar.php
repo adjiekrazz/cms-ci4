@@ -31,7 +31,7 @@
     <ul>
       <?php 
         foreach ($categories as $category){
-          echo "<li><a href='" . base_url($category['slug']) . "'>$category[slug]</a></li>";
+          echo "<li><a href='" . base_url($category['slug']) . "'>$category[name]</a></li>";
         }
       ?>
     </ul>
