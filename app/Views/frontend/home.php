@@ -182,158 +182,41 @@
               Portfolio
             </h3>
             <p class="subtitle-a">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+              Here are our latest portfolios.
             </p>
             <div class="line-mf"></div>
           </div>
         </div>
       </div>
       <div class="row">
+        <?php
+          foreach ($portfolios as $portfolio) {    
+        ?>
         <div class="col-md-4">
           <div class="work-box">
-            <a href="<?= base_url('img/devfolio/work-1.jpg') ?>" data-lightbox="gallery-mf">
+            <a href="<?= $portfolio['slug'] ?>">
               <div class="work-img">
-                <img src="<?= base_url('img/devfolio/work-1.jpg') ?>" alt="" class="img-fluid">
+                <img src="<?= $portfolio['cover'] ?>" alt="" class="img-fluid">
               </div>
               <div class="work-content">
                 <div class="row">
                   <div class="col-sm-8">
-                    <h2 class="w-title">Lorem impsum dolor</h2>
+                    <h2 class="w-title"><?= $portfolio['title'] ?></h2>
                     <div class="w-more">
-                      <span class="w-ctegory">Web Design</span> / <span class="w-date">18 Sep. 2018</span>
+                      <span class="w-date"><?= date('d M Y', strtotime($portfolio['date'])) ?></span>
                     </div>
                   </div>
                   <div class="col-sm-4">
                     <div class="w-like">
-                      <span class="ion-ios-plus-outline"></span>
+                      <span class="ion-ios-star-outline"></span>
                     </div>
                   </div>
                 </div>
               </div>
             </a>
           </div>
-        </div>
-        <div class="col-md-4">
-          <div class="work-box">
-            <a href="<?= base_url('img/devfolio/work-2.jpg') ?>" data-lightbox="gallery-mf">
-              <div class="work-img">
-                <img src="<?= base_url('img/devfolio/work-2.jpg') ?>" alt="" class="img-fluid">
-              </div>
-              <div class="work-content">
-                <div class="row">
-                  <div class="col-sm-8">
-                    <h2 class="w-title">Loreda Cuno Nere</h2>
-                    <div class="w-more">
-                      <span class="w-ctegory">Web Design</span> / <span class="w-date">18 Sep. 2018</span>
-                    </div>
-                  </div>
-                  <div class="col-sm-4">
-                    <div class="w-like">
-                      <span class="ion-ios-plus-outline"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="work-box">
-            <a href="<?= base_url('img/devfolio/work-3.jpg') ?>" data-lightbox="gallery-mf">
-              <div class="work-img">
-                <img src="<?= base_url('img/devfolio/work-3.jpg') ?>" alt="" class="img-fluid">
-              </div>
-              <div class="work-content">
-                <div class="row">
-                  <div class="col-sm-8">
-                    <h2 class="w-title">Mavrito Lana Dere</h2>
-                    <div class="w-more">
-                      <span class="w-ctegory">Web Design</span> / <span class="w-date">18 Sep. 2018</span>
-                    </div>
-                  </div>
-                  <div class="col-sm-4">
-                    <div class="w-like">
-                      <span class="ion-ios-plus-outline"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="work-box">
-            <a href="<?= base_url('img/devfolio/work-4.jpg') ?>" data-lightbox="gallery-mf">
-              <div class="work-img">
-                <img src="<?= base_url('img/devfolio/work-4.jpg') ?>" alt="" class="img-fluid">
-              </div>
-              <div class="work-content">
-                <div class="row">
-                  <div class="col-sm-8">
-                    <h2 class="w-title">Bindo Laro Cado</h2>
-                    <div class="w-more">
-                      <span class="w-ctegory">Web Design</span> / <span class="w-date">18 Sep. 2018</span>
-                    </div>
-                  </div>
-                  <div class="col-sm-4">
-                    <div class="w-like">
-                      <span class="ion-ios-plus-outline"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="work-box">
-            <a href="<?= base_url('img/devfolio/work-5.jpg') ?>" data-lightbox="gallery-mf">
-              <div class="work-img">
-                <img src="<?= base_url('img/devfolio/work-5.jpg') ?>" alt="" class="img-fluid">
-              </div>
-              <div class="work-content">
-                <div class="row">
-                  <div class="col-sm-8">
-                    <h2 class="w-title">Studio Lena Mado</h2>
-                    <div class="w-more">
-                      <span class="w-ctegory">Web Design</span> / <span class="w-date">18 Sep. 2018</span>
-                    </div>
-                  </div>
-                  <div class="col-sm-4">
-                    <div class="w-like">
-                      <span class="ion-ios-plus-outline"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="work-box">
-            <a href="i<?= base_url('img/devfolio/work-6.jpg') ?>" data-lightbox="gallery-mf">
-              <div class="work-img">
-                <img src="<?= base_url('img/devfolio/work-6.jpg') ?>" alt="" class="img-fluid">
-              </div>
-              <div class="work-content">
-                <div class="row">
-                  <div class="col-sm-8">
-                    <h2 class="w-title">Studio Big Bang</h2>
-                    <div class="w-more">
-                      <span class="w-ctegory">Web Design</span> / <span class="w-date">18 Sep. 2017</span>
-                    </div>
-                  </div>
-                  <div class="col-sm-4">
-                    <div class="w-like">
-                      <span class="ion-ios-plus-outline"></span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-        
+        </div> 
+        <?php } ?>       
       </div>
     </div>
   </section>

@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\ArticleModel;
 use App\Models\CategoryModel;
 use App\Models\PageModel;
+use App\Models\PortfolioModel;
 use App\Models\SettingModel;
 
 class Welcome extends BaseController
@@ -14,6 +15,7 @@ class Welcome extends BaseController
 	protected $settingModel;
 	protected $categoryModel;
 	protected $pageModel;
+	protected $portfolioModel;
 
 	public function __construct()
 	{
@@ -21,12 +23,14 @@ class Welcome extends BaseController
 		$this->settingModel = new SettingModel();
 		$this->categoryModel = new CategoryModel();
 		$this->pageModel = new PageModel();
+		$this->portfolioModel = new PortfolioModel();
 	}
 
 	public function index()
 	{
 		$data = [
 			'articles' => $this->articleModel->where('status', 'publish')->orderBy('created_at', 'desc')->findAll(3, 0),
+			'portfolios' => $this->portfolioModel->findAll(3, 0),
 			'setting' => $this->settingModel->first()
 		];
 
@@ -71,6 +75,20 @@ class Welcome extends BaseController
 		];
 
 		return view('frontend/page', $data);
+	}
+
+	public function portfolio($slug)
+	{
+		$data = [
+			'portfolio' => $this->portfolioModel->where('slug', 'portfolio/' . $slug)->first(),
+			'setting' => $this->settingModel->first(),
+		];
+
+		if ($data['portfolio'] !== null){
+			$data['portfolio']['cover'] = 'ImageRender/' . $data['portfolio']['cover'];
+		}
+
+		return view('frontend/portfolio', $data);
 	}
 
 	public function category($slug)

@@ -70,6 +70,16 @@
               </p>
             </a>
           </li>
+          <?php endif; 
+          if (has_permission('read-portfolio')): ?>
+          <li class="nav-item">
+            <a href="<?= base_url('backend/portfolio') ?>" class="nav-link <?= uri_string(true) == 'backend/portfolio' ? 'active' : '' ?>">
+              <i class="nav-icon fas fa-tags"></i>
+              <p>
+                Portfolio
+              </p>
+            </a>
+          </li>
           <?php endif; ?>
           <li class="nav-item">
             <a href="<?= base_url('backend/profile') ?>" class="nav-link <?= uri_string(true) == 'backend/profile' ? 'active' : '' ?>">

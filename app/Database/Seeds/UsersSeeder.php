@@ -118,6 +118,22 @@ class UsersSeeder extends Seeder
                 'name' => 'delete-page',
                 'description' => 'Permission to delete existing page.'
             ],
+            [
+                'name' => 'read-portfolio',
+                'description' => 'Basic permission to read or view page.'
+            ],
+            [
+                'name' => 'create-portfolio',
+                'description' => 'Permission to create new page.'
+            ],
+            [
+                'name' => 'update-portfolio',
+                'description' => 'Permission to update existing page.'
+            ],
+            [
+                'name' => 'delete-portfolio',
+                'description' => 'Permission to delete existing page.'
+            ],
         ];
 
         $this->db->table('auth_permissions')->insertBatch($permissions);
@@ -146,6 +162,14 @@ class UsersSeeder extends Seeder
             ['group_id' => 1, 'permission_id' => 18],
             ['group_id' => 1, 'permission_id' => 19],
             ['group_id' => 1, 'permission_id' => 20],
+            ['group_id' => 1, 'permission_id' => 21],
+            ['group_id' => 1, 'permission_id' => 22],
+            ['group_id' => 1, 'permission_id' => 23],
+            ['group_id' => 1, 'permission_id' => 24],
+            ['group_id' => 2, 'permission_id' => 24],
+            ['group_id' => 2, 'permission_id' => 23],
+            ['group_id' => 2, 'permission_id' => 22],
+            ['group_id' => 2, 'permission_id' => 21],
             ['group_id' => 2, 'permission_id' => 20],
             ['group_id' => 2, 'permission_id' => 19],
             ['group_id' => 2, 'permission_id' => 18],

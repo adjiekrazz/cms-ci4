@@ -13,5 +13,6 @@ class DatabaseSeeder extends Seeder
 		$this->call('SettingsSeeder');
 		$this->call('ArticlesSeeder');
 		$this->call('PagesSeeder');
+		$this->call('PortfoliosSeeder');
 	}
 }

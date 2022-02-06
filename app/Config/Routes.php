@@ -68,6 +68,9 @@ $routes->group('', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->get('blog/(:num)', 'Welcome::blog/$1');
     // Routes for page
     $routes->get('page/(:any)', 'Welcome::page/$1');
+    // Routes for portfolio
+    $routes->match(['get', 'post'], 'portfolio/ImageRender/(:segment)', 'ImageRender::index/$1');
+    $routes->get('portfolio/(:any)', 'Welcome::portfolio/$1');
     // Image Render
     $routes->match(['get', 'post'], 'ImageRender/(:segment)', 'ImageRender::index/$1');
 
@@ -85,6 +88,12 @@ $routes->group('', ['namespace' => 'App\Controllers'], function($routes) {
         $routes->post('category/addCategory', 'Category::addCategory');
         $routes->post('category/editCategory', 'Category::editCategory');
         $routes->post('category/deleteCategory/(:num)', 'Category::deleteCategory/$1');
+        // portfolio
+        $routes->get('portfolio', 'Portfolio::index');
+        $routes->post('portfolio/getPortfolios', 'Portfolio::getPortfolios');
+        $routes->post('portfolio/addPortfolio', 'Portfolio::addPortfolio');
+        $routes->post('portfolio/editPortfolio', 'Portfolio::editPortfolio');
+        $routes->post('portfolio/deletePortfolio/(:num)', 'Portfolio::deletePortfolio/$1');
         // page
         $routes->get('page', 'Page::index');
         $routes->post('page/getPages', 'Page::getPages');
