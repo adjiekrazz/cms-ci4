@@ -27,7 +27,7 @@ class PageModel extends Model
 	protected $validationRules      = [
 		'title' => [
 			'label' => 'Title',
-			'rules'  => 'required|string'
+			'rules'  => 'required|string|is_unique[pages.title,id,{id}]'
 		],
 		'content' => [
 			'label' => 'Content',
