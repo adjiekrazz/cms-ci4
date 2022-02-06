@@ -68,6 +68,8 @@ $routes->group('', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->get('blog/(:num)', 'Welcome::blog/$1');
     // Routes for page
     $routes->get('page/(:any)', 'Welcome::page/$1');
+    // Image Render
+    $routes->match(['get', 'post'], 'ImageRender/(:segment)', 'ImageRender::index/$1');
 
     $routes->group('backend', ['filter' => 'login'],function($routes){
         $routes->get('', 'Dashboard::index');

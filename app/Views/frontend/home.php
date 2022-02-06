@@ -396,7 +396,7 @@
         <div class="col-md-4">
           <div class="card card-blog">
             <div class="card-img">
-              <a href="<?= $article['slug'] ?>"><img src="<?= base_url('img/devfolio/post-1.jpg') ?>" alt="" class="img-fluid"></a>
+              <a href="<?= $article['slug'] ?>"><img src="<?= $article['cover'] ?>" alt="" class="img-fluid"></a>
             </div>
             <div class="card-body">
               <div class="card-category-box">

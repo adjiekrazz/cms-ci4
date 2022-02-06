@@ -267,7 +267,9 @@
                     { "data": "title" },
                     { "data": "author.name" },
                     { "data": "category.name" },
-                    { "data": "cover" },
+                    { "render": (data, type, row) => {
+                        return '<img width="150" height="150" src="' + row.cover + '"/>';
+                    }},
                     { "data": "status" },
                     { "render": (data, type, row) => {
                         let content = escapeHtml(row.content);

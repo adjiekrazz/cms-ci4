@@ -139,9 +139,9 @@ class ArticleModel extends Model
 
 			try {
 				new File(WRITEPATH . 'uploads' . DIRECTORY_SEPARATOR . $fileName, true);
-				$data['cover'] = "<img width='150' height='150' src='ImageRender/$fileName'/>";
+				$data['cover'] = 'ImageRender/' . $fileName;
 			} catch (FileNotFoundException $notFound){
-				$data['cover'] = "Image isn't found";
+				$data['cover'] = "";
 			}
 		} else {
 			foreach ($arrayData['data'] as &$data){
@@ -149,9 +149,9 @@ class ArticleModel extends Model
 				
 				try {
 					new File(WRITEPATH . 'uploads' . DIRECTORY_SEPARATOR . $fileName, true);
-					$data['cover'] = "<img width='150' height='150' src='ImageRender/$fileName'/>";
+					$data['cover'] = 'ImageRender/' . $fileName;
 				} catch (FileNotFoundException $notFound){
-					$data['cover'] = "Image isn't found";
+					$data['cover'] = "";
 					continue;
 				}
 			}
