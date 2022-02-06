@@ -61,7 +61,7 @@ class Welcome extends BaseController
 	public function page($slug)
 	{
 		$data = [
-			'page' => $this->pageModel->where('slug', $slug)->first(),
+			'page' => $this->pageModel->where('slug', 'page/' . $slug)->first(),
 			'setting' => $this->settingModel->first(),
 		];
 
