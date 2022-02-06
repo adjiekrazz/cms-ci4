@@ -62,39 +62,68 @@ class ArticleModel extends Model
 
 	protected function withAuthor(array $arrayData)
 	{
-		$authorModel = new UserModel();
+		if ($arrayData['data'] === null) 
+			return $arrayData;
 		
-		foreach ($arrayData['data'] as &$data){
-			$authorId = $data['author_id'];
+		if (isset($arrayData['data']['id'])) {
+			$authorId = $arrayData['data']['author_id'];
 
-			if (! isset($authorId)) continue;
+			if (! isset($authorId))
+				return $arrayData;
 
-			$author = $authorModel->find($authorId);
-			if ($author) {
-				$data['author'] = [
-					'email' => $author->email,
-					'name' => $author->name,
-					'username' => $author->username,
-					'id' => $author->id
-				];
-			} else {
-				$data['author'] = null;
+			$arrayData['data']['author'] = $this->_findAuthor($authorId);
+		} else {
+			foreach ($arrayData['data'] as &$data){
+				$authorId = $data['author_id'];
+
+				if (! isset($authorId)) continue;
+
+				$data['author'] = $this->_findAuthor($authorId);
 			}
 		}
 		
 		return $arrayData;
 	}
 
+	private function _findAuthor($authorId)
+	{
+		$authorModel = new UserModel();
+		$author = $authorModel->find($authorId);
+
+		if ($author) {
+			return [
+				'email' => $author->email,
+				'name' => $author->name,
+				'username' => $author->username,
+				'id' => $author->id
+			];
+		} else {
+			return $data['author'] = null;
+		}
+	}
+
 	protected function withCategory(array $arrayData)
 	{
+		if ($arrayData['data'] === null) 
+			return $arrayData;
+
 		$categoryModel = new CategoryModel();
 		
-		foreach ($arrayData['data'] as &$data){
-			$categoryId = $data['category_id'];
+		if (isset($arrayData['data']['id'])) {
+			$categoryId = $arrayData['data']['category_id'];
 
-			if (! isset($categoryId)) continue;
-
-			$data['category'] = $categoryModel->find($categoryId);
+			if (! isset($categoryId))
+				return $arrayData;
+			
+			$arrayData['data']['category'] = $categoryModel->find($categoryId);
+		} else {
+			foreach ($arrayData['data'] as &$data){
+				$categoryId = $data['category_id'];
+	
+				if (! isset($categoryId)) continue;
+	
+				$data['category'] = $categoryModel->find($categoryId);
+			}
 		}
 		
 		return $arrayData;
@@ -102,17 +131,30 @@ class ArticleModel extends Model
 
 	protected function renderCoverImage(array $arrayData)
 	{
-		foreach ($arrayData['data'] as &$data){
-			$fileName = $data['cover'];
+		if ($arrayData['data'] === null) 
+			return $arrayData;
 			
+		if (isset($arrayData['data']['id'])) {
+			$fileName = $arrayData['data']['cover'];
+
 			try {
-				$file = new File(WRITEPATH . 'uploads' . DIRECTORY_SEPARATOR . $fileName, true);
+				new File(WRITEPATH . 'uploads' . DIRECTORY_SEPARATOR . $fileName, true);
+				$data['cover'] = "<img width='150' height='150' src='ImageRender/$fileName'/>";
 			} catch (FileNotFoundException $notFound){
 				$data['cover'] = "Image isn't found";
-				continue;
 			}
-
-			$data['cover'] = "<img width='150' height='150' src='ImageRender/$fileName'/>";
+		} else {
+			foreach ($arrayData['data'] as &$data){
+				$fileName = $data['cover'];
+				
+				try {
+					new File(WRITEPATH . 'uploads' . DIRECTORY_SEPARATOR . $fileName, true);
+					$data['cover'] = "<img width='150' height='150' src='ImageRender/$fileName'/>";
+				} catch (FileNotFoundException $notFound){
+					$data['cover'] = "Image isn't found";
+					continue;
+				}
+			}
 		}
 		
 		return $arrayData;
