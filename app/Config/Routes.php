@@ -21,7 +21,7 @@ $routes->setDefaultNamespace('App\Controllers');
 $routes->setDefaultController('Welcome');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
-$routes->set404Override();
+$routes->set404Override('App\Controllers\Welcome::notFound');
 $routes->setAutoRoute(false);
 
 /*
@@ -56,7 +56,7 @@ $routes->group('', ['namespace' => 'App\Controllers'], function($routes) {
     $routes->post('reset-password', 'AuthController::attemptReset');
 
     // Routes for search
-    $routes->get('search', 'Welcome::search');
+    $routes->match(['get', 'post'],'search', 'Welcome::search');
     $routes->get('search/(:any)', 'Welcome::search/$1');
     $routes->get('search/(:any)/(:num)', 'Welcome::search/$1/$2');
 

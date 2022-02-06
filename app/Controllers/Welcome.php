@@ -35,8 +35,13 @@ class Welcome extends BaseController
 
 	public function single($slug)
 	{
+		$article = $this->articleModel->where('slug', $slug)->where('status', 'publish')->first();
+
+		if (! $article)
+			throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+
 		$data = [
-			'article' => $this->articleModel->where('slug', $slug)->where('status', 'publish')->first(),
+			'article' => $article,
 			'feed_articles' => $this->articleModel->where('status', 'publish')->orderBy('rand()')->findAll(5, 0),
 			'categories' => $this->categoryModel->findAll(),
 			'setting' => $this->settingModel->first(),
@@ -84,5 +89,14 @@ class Welcome extends BaseController
 		];
 
 		return view('frontend/category', $data);
+	}
+
+	public function notFound()
+	{
+		$data = [
+			'setting' => $this->settingModel->first()
+		];
+
+		echo view('frontend/not_found', $data);
 	}
 }
