@@ -12,17 +12,17 @@ class PagesSeeder extends Seeder
 		$pages = [
 			[
 				'title' => 'Services',
-				'slug' => 'services',
+				'slug' => 'page/services',
 				'content' => '',
 			],
 			[
 				'title' => 'About',
-				'slug' => 'about',
+				'slug' => 'page/about',
 				'content' => '',
 			],
 			[
 				'title' => 'Contact',
-				'slug' => 'contact',
+				'slug' => 'page/contact',
 				'content' => '',
 			],
 		];

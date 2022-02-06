@@ -69,7 +69,7 @@ class Page extends BaseController
 		if (! $this->validation->run($pages_data))
 			return $this->failValidationErrors($this->validation->getErrors());
 
-        $pages_data['slug'] = strtolower(url_title($this->request->getPost(('title'))));
+        $pages_data['slug'] = 'page/' . strtolower(url_title($this->request->getPost(('title'))));
 
 		if ($this->model->save($pages_data))
 		    return $this->respondCreated($pages_data);
@@ -83,6 +83,7 @@ class Page extends BaseController
             return $this->failForbidden("You don't have permissions to edit resources.");
         
         $pages_data = [
+            'id' => $this->request->getPost('id'),
             'title' => $this->request->getPost('title'),
             'content' => $this->request->getPost('content'),
         ];
@@ -91,9 +92,9 @@ class Page extends BaseController
         if (!$this->validation->run($pages_data))
             return $this->failValidationErrors($this->validation->getErrors());
 
-        $pages_data['slug'] = strtolower(url_title($this->request->getPost(('title'))));
+        $pages_data['slug'] = 'page' . strtolower(url_title($this->request->getPost(('title'))));
     
-        if ($this->model->update($this->request->getPost('id'), $pages_data))
+        if ($this->model->save($pages_data))
             return $this->respondCreated($pages_data);
         
         return $this->fail(new \CodeIgniter\Database\Exceptions\DatabaseException()); 
