@@ -91,6 +91,33 @@ class Welcome extends BaseController
 		return view('frontend/category', $data);
 	}
 
+	public function search()
+	{
+		$uri = service('uri');
+		$search = $uri->getSegment(2)
+			? $uri->getSegment(2)
+			: htmlentities((trim($this->request->getPost('search')))? trim($this->request->getPost('search')): '');
+
+
+		$data = [
+			'setting' => $this->settingModel->first(),
+			'articles' => $this->articleModel->groupStart()
+					->where('status', 'publish')
+						->groupStart()
+							->like('title', $search)
+							->orLike('content', $search)
+						->groupEnd()
+					->groupEnd()
+					->paginate(4),
+			'articles_pager' => $this->articleModel->pager,
+			'feed_articles' => $this->articleModel->where('status', 'publish')->orderBy('rand()')->findAll(5, 0),
+			'categories' => $this->categoryModel->findAll(),
+			'search' => $search,
+		];
+
+		return view('frontend/search', $data);
+	}
+
 	public function notFound()
 	{
 		$data = [
