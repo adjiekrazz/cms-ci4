@@ -82,6 +82,7 @@ class Category extends BaseController
             return $this->failForbidden("You don't have permissions to edit resources.");
         
         $categories_data = [
+            'id' => $this->request->getVar('id'),
             'name' => $this->request->getVar('name'),
             'slug' => strtolower(url_title($this->request->getVar('name')))
         ];
@@ -90,7 +91,7 @@ class Category extends BaseController
         if (!$this->validation->run($categories_data))
             return $this->failValidationErrors($this->validation->getErrors());
     
-        if ($this->model->update($this->request->getVar('id'), $categories_data))
+        if ($this->model->save($categories_data))
             return $this->respondCreated($categories_data);
         
         return $this->fail(new \CodeIgniter\Database\Exceptions\DatabaseException()); 

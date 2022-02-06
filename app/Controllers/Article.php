@@ -114,6 +114,7 @@ class Article extends BaseController
             return $this->fail('Article ID required.');
 
         $articles_data = [
+            'id' => $id,
             'title' => $this->request->getPost('title'),
 			'category_id' => $this->request->getPost('category_id'),
 			'author_id' => user_id(),
@@ -142,7 +143,7 @@ class Article extends BaseController
 
         $articles_data['slug'] = strtolower(url_title($articles_data['title']));
 
-        if (! $this->model->update($id, $articles_data))
+        if (! $this->model->save($articles_data))
             return $this->fail(new \CodeIgniter\Database\Exceptions\DatabaseException()); 
 
         return $this->respondUpdated($articles_data);
