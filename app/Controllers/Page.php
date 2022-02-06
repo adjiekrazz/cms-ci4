@@ -92,7 +92,7 @@ class Page extends BaseController
         if (!$this->validation->run($pages_data))
             return $this->failValidationErrors($this->validation->getErrors());
 
-        $pages_data['slug'] = 'page' . strtolower(url_title($this->request->getPost(('title'))));
+        $pages_data['slug'] = 'page/' . strtolower(url_title($this->request->getPost(('title'))));
     
         if ($this->model->save($pages_data))
             return $this->respondCreated($pages_data);
