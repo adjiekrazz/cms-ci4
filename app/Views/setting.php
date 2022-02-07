@@ -25,69 +25,76 @@
 
         <section class="content">
             <div class="container-fluid">
-                <div class="card">
-                    <div class="card-body">
-                        <?php if(has_permission('read-setting')): ?>
-                        <?= form_open_multipart('setting/editSetting', 'id="editData" class="needs-validation"'); ?>
-                        <div class="row">
-                            <div class="form-group col-6">
-                                <label for="site_name" class="form-label">Site Name *</label>
-                                <input type="text" class="form-control add-input" id="site_name" name="site_name" autocomplete="off" value="<?= $setting->site_name ?>">
-                                <div id="site_nameFeedback" class="form-feedback"></div>
-                            </div>
-                            <div class="form-group col-6">
-                                <label for="site_logo">Site Logo</label>
-                                <div class="custom-file">
-                                    <label for="site_logo" class="custom-file-label">Select Logo..</label>
-                                    <input type="file" class="custom-file-input edit-input" id="site_logo" name="site_logo" accept=".gif,.jpg,.jpeg,.png">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <?php if(has_permission('read-setting')): ?>
+                                <?= form_open_multipart('setting/editSetting', 'id="editData" class="needs-validation"'); ?>
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label for="site_name" class="form-label">Site Name *</label>
+                                        <input type="text" class="form-control add-input" id="site_name" name="site_name" autocomplete="off" value="<?= $setting->site_name ?>">
+                                        <div id="site_nameFeedback" class="form-feedback"></div>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="site_logo">Site Logo</label>
+                                        <div class="custom-file">
+                                            <label for="site_logo" class="custom-file-label">Select Logo..</label>
+                                            <input type="file" class="custom-file-input edit-input" id="site_logo" name="site_logo" accept=".gif,.jpg,.jpeg,.png">
+                                        </div>
+                                        <div id="coverFeedback" class="form-feedback"></div>
+                                    </div>
                                 </div>
-                                <div id="coverFeedback" class="form-feedback"></div>
+                                <div class="row">
+                                    <div class="form-group col-12">
+                                        <label for="site_description" class="form-label">Site Description</label>
+                                        <input type="text" class="form-control edit-input" id="site_description" name="site_description" autocomplete="off" value="<?= $setting->site_description ?>">
+                                        <div id="site_descriptionFeedback" class="form-feedback"></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label for="facebook_link" class="form-label">Facebook Link</label>
+                                        <input type="text" class="form-control edit-input" id="facebook_link" name="facebook_link" autocomplete="off" value="<?= $setting->facebook_link ?>">
+                                        <div id="facebook_linkFeedback" class="form-feedback"></div>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="twitter_link" class="form-label">Twitter Link</label>
+                                        <input type="text" class="form-control edit-input" id="twitter_link" name="twitter_link" autocomplete="off" value="<?= $setting->twitter_link ?>">
+                                        <div id="twitter_linkFeedback" class="form-feedback"></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label for="instagram_link" class="form-label">Instagram Link</label>
+                                        <input type="text" class="form-control edit-input" id="instagram_link" name="instagram_link" autocomplete="off" value="<?= $setting->instagram_link ?>">
+                                        <div id="instagram_linkFeedback" class="form-feedback"></div>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="github_link" class="form-label">Github Link</label>
+                                        <input type="text" class="form-control edit-input" id="github_link" name="github_link" autocomplete="off" value="<?= $setting->github_link ?>">
+                                        <div id="github_linkFeedback" class="form-feedback"></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-sm btn-primary btn-block">Save Setting</button>
+                                    </div>
+                                </div>
+                                <?= form_close() ?>
+                                <?php else: ?>
+                                <span>You don't have permissions to view settings.</span>
+                                <?php endif; ?>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="form-group col-12">
-                                <label for="site_description" class="form-label">Site Description</label>
-                                <input type="text" class="form-control edit-input" id="site_description" name="site_description" autocomplete="off" value="<?= $setting->site_description ?>">
-                                <div id="site_descriptionFeedback" class="form-feedback"></div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <img width="100%" src="<?= $setting->site_logo ?>" />
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="form-group col-12">
-                                <label for="facebook_link" class="form-label">Facebook Link</label>
-                                <input type="text" class="form-control edit-input" id="facebook_link" name="facebook_link" autocomplete="off" value="<?= $setting->facebook_link ?>">
-                                <div id="facebook_linkFeedback" class="form-feedback"></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-12">
-                                <label for="twitter_link" class="form-label">Twitter Link</label>
-                                <input type="text" class="form-control edit-input" id="twitter_link" name="twitter_link" autocomplete="off" value="<?= $setting->twitter_link ?>">
-                                <div id="twitter_linkFeedback" class="form-feedback"></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-12">
-                                <label for="instagram_link" class="form-label">Instagram Link</label>
-                                <input type="text" class="form-control edit-input" id="instagram_link" name="instagram_link" autocomplete="off" value="<?= $setting->instagram_link ?>">
-                                <div id="instagram_linkFeedback" class="form-feedback"></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-12">
-                                <label for="github_link" class="form-label">Github Link</label>
-                                <input type="text" class="form-control edit-input" id="github_link" name="github_link" autocomplete="off" value="<?= $setting->github_link ?>">
-                                <div id="github_linkFeedback" class="form-feedback"></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <button type="submit" class="btn btn-sm btn-primary btn-block">Save Setting</button>
-                            </div>
-                        </div>
-                        <?= form_close() ?>
-                        <?php else: ?>
-                        <span>You don't have permissions to view settings.</span>
-                        <?php endif; ?>
                     </div>
                 </div>
             </div>

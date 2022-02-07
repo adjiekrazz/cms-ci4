@@ -22,6 +22,10 @@ class Setting extends BaseController
 	public function index()
 	{
 		$data['setting'] = $this->model->first();
+
+        if ($data['setting'])
+            $data['setting']->site_logo = 'ImageRender/' . $data['setting']->site_logo;
+
 		return view('setting', $data);
 	}
 
