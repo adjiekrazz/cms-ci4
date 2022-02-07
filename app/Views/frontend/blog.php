@@ -40,14 +40,12 @@
           ?>
             <center class="mt-5">No articles.</center>
           <?php
-            }
-
-            foreach ($articles as $article) {
+            } else {
+              foreach ($articles as $article) {
           ?>
           <div class="post-box">
             <div class="post-thumb">
-              <?= $article['cover'] ?>
-              <!--<img src="<?= base_url('img/devfolio/post-1.jpg') ?>" class="img-fluid" alt="">-->
+              <img src="<?= $article['cover'] ?>" class="img-fluid" alt="">
             </div>
             <div class="post-meta">
               <h1 class="article-title"><?= $article['title'] ?></h1>
@@ -71,6 +69,7 @@
             </div>
           </div>
           <?php 
+              }
               echo $articles_pager->links('articles', 'custom_pager');
             }
           ?>

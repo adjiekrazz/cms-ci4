@@ -41,7 +41,7 @@
           ?>
           <div class="post-box">
             <div class="post-thumb text-center">
-              <img src="<?= $portfolio['cover'] ?>" class="img-fluid" alt="" style="max-width:640px;max-height:480px;">
+              <img src="<?= $portfolio['cover'] ?>" class="img-fluid" alt="" width="100%">
             </div>
             <br><br>
             <div class="post-meta">

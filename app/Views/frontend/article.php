@@ -44,7 +44,7 @@
           ?>
           <div class="post-box">
             <div class="post-thumb">
-              <img src="<?= $article['cover'] ?>" class="img-fluid" alt="">
+              <img src="<?= $article['cover'] ?>" class="img-fluid" alt="" width="100%">
             </div>
             <div class="post-meta">
               <h1 class="article-title"><?= $article['title'] ?></h1>

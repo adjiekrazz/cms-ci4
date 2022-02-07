@@ -196,7 +196,7 @@
           <div class="work-box">
             <a href="<?= $portfolio['slug'] ?>">
               <div class="work-img">
-                <img src="<?= $portfolio['cover'] ?>" alt="" class="img-fluid">
+                <img src="<?= $portfolio['cover'] ?>" alt="" class="img-fluid" width="100%">
               </div>
               <div class="work-content">
                 <div class="row">
@@ -279,7 +279,7 @@
         <div class="col-md-4">
           <div class="card card-blog">
             <div class="card-img">
-              <a href="<?= $article['slug'] ?>"><img src="<?= $article['cover'] ?>" alt="" class="img-fluid"></a>
+              <a href="<?= $article['slug'] ?>"><img src="<?= $article['cover'] ?>" alt="" class="img-fluid" width="100%"></a>
             </div>
             <div class="card-body">
               <div class="card-category-box">
