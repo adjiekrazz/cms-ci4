@@ -262,9 +262,10 @@
                     }},
                     { "data": "date" },
                     { "render": function(data, type, row){
+                        let content = escapeHtml(row.content);
                         let a = "'"
                         let s = "', '"
-                        let html = '<a href="#editModal" data-toggle="modal" onclick="return editPortfolio('+a+row.id+s+row.title+s+row.content+s+row.date+a+')"><span class="badge bg-success" data-toggle="tooltip" data-placement="top" title="Edit Portfolio">Edit</span></a>&nbsp;'
+                        let html = '<a href="#editModal" data-toggle="modal" onclick="return editPortfolio('+a+row.id+s+row.title+s+content+s+row.date+a+')"><span class="badge bg-success" data-toggle="tooltip" data-placement="top" title="Edit Portfolio">Edit</span></a>&nbsp;'
                         html += '<a href="#deleteConfirmationModal" data-toggle="modal" onclick="return deleteConfirm('+a+row.id+s+row.title+a+')"><span class="badge bg-danger" data-toggle="tooltip" data-placement="top" title="Delete Portfolio">Delete</span></a>'
                         return html
                     } }
