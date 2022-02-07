@@ -10,19 +10,19 @@
     <div class="navbar-collapse collapse justify-content-end" id="navbarDefault">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link js-scroll active" href="<?= base_url('/') ?>">Home</a>
+          <a class="nav-link js-scroll <?= uri_string(true) == '' ? 'active' : '' ?>" href="<?= base_url('/') ?>">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll" href="<?= base_url('page/about') ?>">About</a>
+          <a class="nav-link js-scroll <?= uri_string(true) == 'page/about' ? 'active' : '' ?>" href="<?= base_url('page/about') ?>">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll" href="<?= base_url('page/services') ?>">Services</a>
+          <a class="nav-link js-scroll <?= uri_string(true) == 'page/services' ? 'active' : '' ?>" href="<?= base_url('page/services') ?>">Services</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll" href="<?= base_url('page/contact') ?>">Contact</a>
+          <a class="nav-link js-scroll <?= uri_string(true) == 'page/contact' ? 'active' : '' ?>" href="<?= base_url('page/contact') ?>">Contact</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link js-scroll" href="<?= base_url('blog') ?>">Blog</a>
+          <a class="nav-link js-scroll <?= uri_string(true) == 'blog' ? 'active' : '' ?>" href="<?= base_url('blog') ?>">Blog</a>
         </li>
         <li class="nav-item">
           <a class="nav-link js-scroll" href="<?= base_url('login') ?>">Login</a>
