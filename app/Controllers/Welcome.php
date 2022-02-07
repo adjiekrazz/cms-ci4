@@ -51,6 +51,8 @@ class Welcome extends BaseController
 			'setting' => $this->settingModel->first(),
 		];
 
+		$data['article']['cover'] = 'ImageRender/' . $article['cover'];
+
 		return view('frontend/article', $data);
 	}
 
