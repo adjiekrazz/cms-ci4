@@ -77,13 +77,6 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-12">
-                            <label for="author" class="form-label">Slug *</label>
-                            <input type="text" class="form-control add-input" id="slug" name="slug" autocomplete="off">
-                            <div id="slugFeedback" class="form-feedback"></div>
-                        </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-12" style="text-align: center;">
                             <button type="submit" class="btn btn-success">Add Category</button>
                             <button type="reset" class="btn btn-danger">Clear</button>
@@ -121,13 +114,6 @@
                             <label for="name" class="form-label">Name *</label>
                             <input type="text" class="form-control edit-input" id="name_edit" name="name" autocomplete="off">
                             <div id="nameEditFeedback" class="form-feedback"></div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-12">
-                            <label for="slug" class="form-label">Slug *</label>
-                            <input type="text" class="form-control edit-input" id="slug_edit" name="slug" autocomplete="off">
-                            <div id="slugFeedback" class="form-feedback"></div>
                         </div>
                     </div>
                     <div class="row">
