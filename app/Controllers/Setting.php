@@ -47,7 +47,7 @@ class Setting extends BaseController
         if ($siteLogo->getSize() === 0) {
             $this->validation->setRules($this->model->getValidationRules(['except' => ['site_logo']]));
         } else {
-            $articles_data['site_logo'] = $siteLogo;
+            $settings_data['site_logo'] = $siteLogo;
             $this->validation->setRules($this->model->getValidationRules());
         }
 
@@ -56,7 +56,7 @@ class Setting extends BaseController
 
         if ($siteLogo->getSize() !== 0) {
             $siteLogoName = $siteLogo->getRandomName();
-            $articles_data['site_logo'] = $siteLogoName;
+            $settings_data['site_logo'] = $siteLogoName;
         }
     
         if (!$this->model->update($this->request->getVar('id'), $settings_data))
