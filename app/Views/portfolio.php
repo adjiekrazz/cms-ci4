@@ -36,10 +36,10 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
+                                            <th>Date</th>
                                             <th>Title</th>
                                             <th>Slug</th>
                                             <th>Cover</th>
-                                            <th>Date</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -255,16 +255,21 @@
                     "url": "portfolio/getPortfolios",
                     "type": "POST"
                 },
+                "order": [[1, 'asc']],
+                "columnDefs": [
+                    { "width": 25, "targets": 0},
+                    { "orderable": false, "targets": [0, 3, 4]}
+                ],
                 "columns": [
                     { "render": (data, type, row, meta) => {
                         return meta.row + 1;
                     }},
+                    { "data": "date" },
                     { "data": "title" },
                     { "data": "slug" },
                     { "render": (data, type, row) => {
                         return '<img width="150" height="150" src="' + row.cover + '" />';
                     }},
-                    { "data": "date" },
                     { "render": function(data, type, row){
                         let content = escapeHtml(row.content);
                         let a = "'"

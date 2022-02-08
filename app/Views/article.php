@@ -257,8 +257,10 @@
                     "url": "article/getArticles",
                     "type": "POST"
                 },
+                "order": [[1, 'asc']],
                 "columnDefs": [
-                    { "width": 50, "targets": 0}
+                    { "width": 25, "targets": 0},
+                    { "orderable": false, "targets": [0, 3, 4, 5, 7]}
                 ],
                 "columns": [
                     { "render": (data, type, row, meta) => {

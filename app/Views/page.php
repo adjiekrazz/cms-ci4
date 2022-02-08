@@ -210,6 +210,11 @@
                     "url": "page/getPages",
                     "type": "POST"
                 },
+                "order": [[1, 'asc']],
+                "columnDefs": [
+                    { "width": 25, "targets": 0},
+                    { "orderable": false, "targets": [0, 2, 3]}
+                ],
                 "columns": [
                     { "render": (data, type, row, meta) => {
                         return meta.row + 1;

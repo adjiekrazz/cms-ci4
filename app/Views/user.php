@@ -293,8 +293,13 @@
                     "url": "user/getUsers",
                     "type": "POST"
                 },
+                "order": [[1, 'asc']],
+                "columnDefs": [
+                    { "width": 25, "targets": 0},
+                    { "orderable": false, "targets": [0, 6]}
+                ],
                 "columns": [
-                    { "return": (data, type, row, meta) => {
+                    { "render": (data, type, row, meta) => {
                         return meta.row + 1;
                     }},
                     { "data": "username" },
