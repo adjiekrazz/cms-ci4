@@ -370,9 +370,9 @@
                 success: function(response) {
                     $('#editModal').modal('hide');
                     portfolio_table.ajax.reload();
-                    fa[0].reset();
                     $('.edit-input').val('');
                     toastr.success('Portfolio Updated');
+                    $('#content').summernote('code', '');
                 },
                 error: function(response){
                     $('.edit-input').closest('input.form-control').removeClass('is-invalid')
