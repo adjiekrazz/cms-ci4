@@ -1,21 +1,25 @@
 # Content Management System with CodeIgniter 4 Framework and Myth/Auth library
-Web Desain & Teknologi Internet
+Template: 
+- Backend ([Admin LTE 3](https://github.com/ColorlibHQ/AdminLTE))
+- Frontend ([DevFolio](https://bootstrapmade.com/devfolio-bootstrap-portfolio-html-template/))
 
 ## Steps 
-- copy the env file into .env, then change the configuration that you needs like baseURL, or database
-- composer install
-- exec in your shell `php spark migrate -all`
-- exec in your shell `php spark db:seed DatabaseSeeder`
-- exec in your shell `php spark serve`
+copy the env file into .env, then change the configuration that you needs like baseURL, or database
+```sh
+$ composer install
+$ php spark migrate -all
+$ php spark db:seed DatabaseSeeder
+$ php spark serve
+```
 
 ## Notes
 The default dummy users :
-- Admin Groups
-    username -> adjiekrazz@example.com
-    password -> password
-- Member Groups
-    username -> fathur@example.com
-    password -> password
+| Username | Password | Groups |
+|----------|----------|--------|
+| admin@example.com | password | admin |
+| maintainer@example.com | password | maintainer |
+| writer@example.com | password | writer |
+| member@example.com | password | member |
 
 This myth-auth is configured without email activation.  So if you register a new user, it will automatically activated.
 
