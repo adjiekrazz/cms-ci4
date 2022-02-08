@@ -35,6 +35,7 @@
                                 <table id="portfolio_table" class="table table-bordered table-sm" style="width:100%">
                                     <thead>
                                         <tr>
+                                            <th>#</th>
                                             <th>Title</th>
                                             <th>Slug</th>
                                             <th>Cover</th>
@@ -255,6 +256,9 @@
                     "type": "POST"
                 },
                 "columns": [
+                    { "render": (data, type, row, meta) => {
+                        return meta.row + 1;
+                    }},
                     { "data": "title" },
                     { "data": "slug" },
                     { "render": (data, type, row) => {

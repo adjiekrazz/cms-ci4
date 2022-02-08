@@ -249,7 +249,6 @@
         bsCustomFileInput.init();
 
         function loadArticle(){
-            let i = 0;
             article_table = $("#article_table").DataTable({
                 "processing": true,
                 "serverSide": true,
@@ -258,10 +257,12 @@
                     "url": "article/getArticles",
                     "type": "POST"
                 },
+                "columnDefs": [
+                    { "width": 50, "targets": 0}
+                ],
                 "columns": [
-                    { "render": (data, type, row) => {
-                        i++;
-                        return i;
+                    { "render": (data, type, row, meta) => {
+                        return meta.row + 1;
                     }},
                     { "data": "created_at" },
                     { "data": "title" },

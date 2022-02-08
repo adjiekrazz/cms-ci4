@@ -34,6 +34,7 @@
                                 <table id="page_table" class="table table-bordered table-sm" style="width:100%">
                                     <thead>
                                         <tr>
+                                            <th>#</th>
                                             <th>Judul</th>
                                             <th>Slug</th>
                                             <th>Actions</th>
@@ -210,6 +211,9 @@
                     "type": "POST"
                 },
                 "columns": [
+                    { "render": (data, type, row, meta) => {
+                        return meta.row + 1;
+                    }},
                     { "data": "title" },
                     { "data": "slug" },
                     { "render": function(data, type, row){

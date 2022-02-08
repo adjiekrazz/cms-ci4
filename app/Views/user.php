@@ -35,6 +35,7 @@
                                 <table id="user_table" class="table table-bordered table-sm" style="width:100%">
                                     <thead>
                                         <tr>
+                                            <th>#</th>
                                             <th>Username</th>
                                             <th>Email</th>
                                             <th>Name</th>
@@ -293,6 +294,9 @@
                     "type": "POST"
                 },
                 "columns": [
+                    { "return": (data, type, row, meta) => {
+                        return meta.row + 1;
+                    }},
                     { "data": "username" },
                     { "data": "email" },
                     { "data": "name" },
