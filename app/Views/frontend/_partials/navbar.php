@@ -25,7 +25,11 @@
           <a class="nav-link js-scroll <?= uri_string(true) == 'blog' ? 'active' : '' ?>" href="<?= base_url('blog') ?>">Blog</a>
         </li>
         <li class="nav-item">
+          <?php if (user()){ ?>
+          <a class="nav-link js-scroll" href="<?= base_url('backend') ?>">Dashboard</a> 
+          <?php } else { ?>
           <a class="nav-link js-scroll" href="<?= base_url('login') ?>">Login</a>
+          <?php } ?>
         </li>
       </ul>
     </div>
