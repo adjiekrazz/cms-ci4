@@ -14,6 +14,9 @@ class UserModel extends MythModel
 
     protected function withGroups($data)
     {
+        if ($data['data'] == null)
+            return $data;
+        
         if (!is_array($data['data'])){
             $data['data']->withRoles();
         } else {
