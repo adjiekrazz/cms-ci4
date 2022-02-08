@@ -7,10 +7,13 @@
     </div>
     <div class="card-body">
         <p class="login-box-msg">Sign in to start your session</p>
-
         <form action="<?= route_to('login') ?>" method="post">
             <?= csrf_field() ?>
-
+            <?php if (session('error')): ?>
+                <div class="alert alert-danger">
+                    <?= session('error') ?>
+                </div>
+            <?php endif; ?>
             <?php if ($config->validFields === ['email']): ?>
             <div class="input-group mb-3">
                 <input type="email" name="login" class="form-control <?php if(session('errors.login')) : ?>is-invalid<?php endif ?>" placeholder="<?=lang('Auth.email')?>">
