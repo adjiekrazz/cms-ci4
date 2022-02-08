@@ -74,7 +74,7 @@
           if (has_permission('read-portfolio')): ?>
           <li class="nav-item">
             <a href="<?= base_url('backend/portfolio') ?>" class="nav-link <?= uri_string(true) == 'backend/portfolio' ? 'active' : '' ?>">
-              <i class="nav-icon fas fa-tags"></i>
+              <i class="nav-icon fas fa-star"></i>
               <p>
                 Portfolio
               </p>
