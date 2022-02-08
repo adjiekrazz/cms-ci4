@@ -50,9 +50,10 @@ class Article extends BaseController
             $articles_query = $articles_query->like('name', $search);
             $articles_query = $articles_query->orLike('slug', $search);
         }
+
+        $articles_filter_total = $articles_query->countAllResults(false);
+        $articles_total = $articles_query->countAllResults(false);
         $articles_data = $articles_query->findAll($limit, $start);
-        $articles_filter_total = $articles_query->countAll();
-        $articles_total = $this->model->countAll();
 
         $callback = array(
             'draw' => $this->request->getVar('draw'),
